@@ -1,8 +1,11 @@
+import { VendaStorage } from './contexts/VendaContext';
 import Rotas from './pages/Rotas';
 
-const App = () => { 
+const App = () => {
   return (
-    <Rotas />
+    <VendaStorage>
+      <Rotas />
+    </VendaStorage>
   );
 };
 
