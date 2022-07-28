@@ -1,0 +1,26 @@
+.header{
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  justify-content: space-around;
+}
+
+.firstDivHeader{
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+}
+
+.main{
+  display: flexbox;
+  
+  /* max-width: 60%; */
+
+  align-self: center;
+  justify-content: center;
+};
+
+.table{
+  margin: 1rem;
+  background-color: aquamarine;
+}
