@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from './VendaProduto.module.css';
 import Header from '../../../components/Header/Header';
 import Button from '../../../components/Button';
@@ -8,6 +8,7 @@ import AreaPesquisa from './AreaPesquisa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { VendaContext } from '../../../contexts/VendaContext';
 
 // Simula resultado de uma busca qualquer na API
 const mockProdutosApi = [
@@ -15,21 +16,25 @@ const mockProdutosApi = [
     id: 1,
     nome: 'Cimento',
     valor: 30,
+    quantidade: 0,
   },
   {
     id: 2,
     nome: 'Tijolo',
     valor: 2,
+    quantidade: 0,
   },
   {
     id: 3,
     nome: 'Telha',
     valor: 10,
+    quantidade: 0,
   },
 ];
 
 const VendaProduto = () => {
   const navigate = useNavigate();
+  const { adicionarProdutos } = useContext(VendaContext);
 
   const [pesquisaProduto, setPesquisaProduto] = useState('');
   const [listaProdutos, setListaProdutos] = useState([]);
@@ -44,8 +49,13 @@ const VendaProduto = () => {
   };
 
   const adicionarProduto = (produto) => {
-    setCarrinho([produto]);
+    setCarrinho([...carrinho, produto]);
     notificar(produto.nome);
+  };
+
+  const proximaEtapa = () => {
+    adicionarProdutos(carrinho);
+    navigate('/VendaResumo');
   };
 
   useEffect(() => {
@@ -81,10 +91,7 @@ const VendaProduto = () => {
       )}
 
       <div className={styles.footer}>
-        <Button
-          disabled={desabilitarBotao}
-          onClick={() => navigate('/VendaResumo')}
-        >
+        <Button disabled={desabilitarBotao} onClick={proximaEtapa}>
           Próxima etapa
         </Button>
       </div>
