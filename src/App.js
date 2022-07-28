@@ -1,13 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
+import Rotas from './pages/Rotas';
 
-const App = () => {
+const App = () => { 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" component={<Login />} />
-      </Routes>
-    </BrowserRouter>
+    <Rotas />
   );
 };
 
