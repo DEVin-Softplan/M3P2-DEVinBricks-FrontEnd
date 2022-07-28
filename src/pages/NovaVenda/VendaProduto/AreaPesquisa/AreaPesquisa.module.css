@@ -1,0 +1,13 @@
+.container {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0 30px 0;
+}
+
+.icon {
+  font-size: 20em;
+  color: var(--text-highlight);
+}

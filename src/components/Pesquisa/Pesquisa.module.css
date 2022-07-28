@@ -1,0 +1,12 @@
+.formulario {
+  padding: 15px 0;
+  display: flex;
+  justify-content: baseline;
+}
+
+.campo {
+  width: 100%;
+  padding: 15px;
+  border-radius: 0.4rem;
+  border: 1px solid #010101;
+}
