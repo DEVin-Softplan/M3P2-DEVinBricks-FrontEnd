@@ -1,0 +1,17 @@
+#root{
+    padding: 10px;
+}
+.textField{
+    margin: 10px;
+    background-color: red;
+}
+
+.Typography{
+        color:blueviolet;
+        stroke: black;
+        font-weight: bold;
+}
+
+.btnconfirmar{
+    background-color: blueviolet;
+}
