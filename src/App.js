@@ -1,11 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
+import VendaProduto from './pages/NovaVenda/VendaProduto/VendaProduto';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" component={<Login />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/venda-produto" element={<VendaProduto />} />
       </Routes>
     </BrowserRouter>
   );
