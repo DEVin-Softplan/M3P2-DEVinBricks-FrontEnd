@@ -1,5 +1,4 @@
 import React from 'react';
-import { TextField, Button } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,6 +10,9 @@ import { Link } from 'react-router-dom';
 import { RiPencilFill } from 'react-icons/ri';
 import styles from './ProdutosLista.module.css';
 import Header from '../../../components/Header/Header';
+import Pesquisa from '../../../components/Pesquisa';
+import Button from '../../../components/Button';
+import { TextField } from '@mui/material';
 
 const handleEditProduc = () => {
 
@@ -36,10 +38,10 @@ const ProdutosLista = (props) => {
     <section className={styles.section}>  
       <header className={styles.header}>
         <div className={styles.firstDivHeader}>          
-          <Header title="Produtos"/>
-          <Button variant="contained">Novo Produto</Button>
-        </div>        
-        <TextField label="Nome do produto ..."/>
+          <Header title="Produtos"/>          
+          <Button>Novo Produto</Button>
+        </div>                
+        <Pesquisa placeholder={"Nome do produto..."}/>
       </header>
 
       <TableContainer component={Paper} className={styles.table}>
