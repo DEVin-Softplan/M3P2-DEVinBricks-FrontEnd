@@ -30,3 +30,8 @@ body, input {
 button {
   cursor: pointer;
 }
+
+.divlanding{
+  display: flex;
+  height: 100vh;
+}
