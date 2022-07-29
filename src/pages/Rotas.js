@@ -8,7 +8,7 @@ import Home from './Home/Home';
 
 const Rotas = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter>    
       <Routes>
         <Route path="/" exact element ={<Home />} />        
         <Route path="/Login" exact element={<Login />} />
