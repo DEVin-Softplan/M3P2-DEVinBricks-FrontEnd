@@ -6,8 +6,7 @@ import Menus from '../../components/Menus';
 const Produtos = () => {
   //Make the rendering as deal with the requisition (form or list)
   return (
-    <main className={styles.main}>
-      {/* <Menus />       */}
+    <main className={styles.main}>      
       <ProdutosLista />
     </main>
   );
