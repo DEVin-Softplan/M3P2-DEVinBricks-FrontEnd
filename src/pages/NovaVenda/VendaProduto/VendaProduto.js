@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from './VendaProduto.module.css';
 import Header from '../../../components/Header/Header';
 import Button from '../../../components/Button';
 import Pesquisa from '../../../components/Pesquisa';
 import CardProduto from './CardProduto';
 import AreaPesquisa from './AreaPesquisa';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+import { VendaContext } from '../../../contexts/VendaContext';
 
 // Simula resultado de uma busca qualquer na API
 const mockProdutosApi = [
@@ -12,31 +16,57 @@ const mockProdutosApi = [
     id: 1,
     nome: 'Cimento',
     valor: 30,
+    quantidade: 0,
   },
   {
     id: 2,
     nome: 'Tijolo',
     valor: 2,
+    quantidade: 0,
   },
   {
     id: 3,
     nome: 'Telha',
     valor: 10,
+    quantidade: 0,
   },
 ];
 
 const VendaProduto = () => {
-  const [productName, setProductName] = useState('');
-  const [productList, setProductList] = useState([]);
+  const navigate = useNavigate();
+  const { adicionarProdutos } = useContext(VendaContext);
 
-  const handleSubmit = (event) => {
+  const [pesquisaProduto, setPesquisaProduto] = useState('');
+  const [listaProdutos, setListaProdutos] = useState([]);
+  const [carrinho, setCarrinho] = useState([]);
+  const [desabilitarBotao, setDesabilitarBotao] = useState(true);
+
+  const notificar = (nome) => toast(`${nome} adicionado ao carrinho`);
+
+  const pesquisarProdutos = (event) => {
     event.preventDefault();
-    console.log(productName);
-    setProductList(mockProdutosApi);
+    setListaProdutos(mockProdutosApi);
   };
+
+  const adicionarProduto = (produto) => {
+    setCarrinho([...carrinho, produto]);
+    notificar(produto.nome);
+  };
+
+  const proximaEtapa = () => {
+    adicionarProdutos(carrinho);
+    navigate('/VendaResumo');
+  };
+
+  useEffect(() => {
+    carrinho.length > 0
+      ? setDesabilitarBotao(false)
+      : setDesabilitarBotao(true);
+  }, [carrinho]);
 
   return (
     <div className={styles.container}>
+      <ToastContainer />
       <div className={styles.headerContainer}>
         <Header title="Nova venda: Produtos" />
         <span>0 itens | R$ 0,00</span>
@@ -44,24 +74,26 @@ const VendaProduto = () => {
 
       <Pesquisa
         placeholder="Pesquise um produto"
-        onChange={(value) => setProductName(value)}
-        onSubmit={handleSubmit}
+        onChange={(value) => setPesquisaProduto(value)}
+        onSubmit={pesquisarProdutos}
       />
 
-      {productList.length === 0 ? (
+      {listaProdutos.length === 0 ? (
         <AreaPesquisa />
       ) : (
-        productList.map((product) => (
+        listaProdutos.map((produto) => (
           <CardProduto
-            key={product.id}
-            nome={product.nome}
-            valor={product.valor}
+            key={produto.id}
+            produto={produto}
+            adicionarProduto={adicionarProduto}
           />
         ))
       )}
 
       <div className={styles.footer}>
-        <Button>Próxima etapa</Button>
+        <Button disabled={desabilitarBotao} onClick={proximaEtapa}>
+          Próxima etapa
+        </Button>
       </div>
     </div>
   );

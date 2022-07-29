@@ -1,5 +1,4 @@
 import React from 'react';
-import { TextField, Button } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,6 +9,10 @@ import Paper from '@mui/material/Paper';
 import { Link } from 'react-router-dom';
 import { RiPencilFill } from 'react-icons/ri';
 import styles from './ProdutosLista.module.css';
+import Header from '../../../components/Header/Header';
+import Pesquisa from '../../../components/Pesquisa';
+import Button from '../../../components/Button';
+import { TextField } from '@mui/material';
 
 const handleEditProduc = () => {
 
@@ -25,24 +28,24 @@ function createData(
 }
 
 const rows = [
-  createData('ATIVO', 'CIMENTO', "R$ 323,00", <Link to='/EditarProduto'><RiPencilFill size={30}/></Link>),
-  createData('ATIVO', 'CIMENTO', "R$ 234,00", <Link to='/EditarProduto'><RiPencilFill size={30}/></Link>),
-  createData('ATIVO', 'CIMENTO', "R$ 556,00", <Link to='/EditarProduto'><RiPencilFill size={30}/></Link>),
+  createData('ATIVO', 'CIMENTO', "R$ 323,00", <Link to='/EditarProduto/100'><RiPencilFill size={30}/></Link>),
+  createData('ATIVO', 'CIMENTO', "R$ 234,00", <Link to='/EditarProduto/200'><RiPencilFill size={30}/></Link>),
+  createData('ATIVO', 'CIMENTO', "R$ 556,00", <Link to='/EditarProduto/300'><RiPencilFill size={30}/></Link>),
 ];
 
-const ProdutosLista = () => {
+const ProdutosLista = (props) => {
   return(    
-    <main className={styles.main}>      
+    <section className={styles.section}>  
       <header className={styles.header}>
-        <div className={styles.firstDivHeader}>
-          <h1>Produtos</h1>
-          <Button variant="contained">Novo Produto</Button>
-        </div>        
-        <TextField label="Nome do produto ..."/>
+        <div className={styles.firstDivHeader}>          
+          <Header title="Produtos"/>          
+          <Button>Novo Produto</Button>
+        </div>                
+        <Pesquisa placeholder={"Nome do produto..."}/>
       </header>
 
       <TableContainer component={Paper} className={styles.table}>
-        <Table sx={{ minWidth: 650 }}  aria-label="caption table">
+        <Table sx={{ minWidth: 250 }}  aria-label="caption table">
           <caption></caption>
           <TableHead>
             <TableRow>
@@ -64,7 +67,7 @@ const ProdutosLista = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </main>
+    </section>
   );
 };
 
