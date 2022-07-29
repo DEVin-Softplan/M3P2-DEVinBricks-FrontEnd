@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './CardProduto.module.css';
 import { BsCartCheck } from 'react-icons/bs';
 
-const CardProduto = ({ produto, adicionarProduto }) => {
+const CardProduto = ({ nome, valor }) => {
   return (
     <main className={styles.container}>
       <section className={styles.infoContainer}>
@@ -10,18 +10,11 @@ const CardProduto = ({ produto, adicionarProduto }) => {
           <BsCartCheck className={styles.image} />
         </div>
         <div className={styles.productContainer}>
-          <h3>{produto.nome}</h3>
-          <span> R$ {produto.valor}</span>
+          <h3>{nome}</h3>
+          <span> R$ {valor}</span>
         </div>
       </section>
-      <div>
-        <button
-          className={styles.adicionar}
-          onClick={() => adicionarProduto(produto)}
-        >
-          +
-        </button>
-      </div>
+      <button className={styles.adicionar}>+</button>
     </main>
   );
 };
