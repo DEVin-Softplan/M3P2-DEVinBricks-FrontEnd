@@ -12,7 +12,7 @@ import { BsFillEyeFill } from "react-icons/bs"
 import { FaWindowClose } from "react-icons/fa"
 import VendaModal from '../VendaModal/VendaModal';
 import { AiFillDelete } from "react-icons/ai"
-import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md"
+import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md"
 
 const venda = {
     comprador: {
@@ -137,7 +137,7 @@ export default function VendasLista() {
             ))}
           </TableBody>
         </Table>
-        <MdArrowBackIosNew onClick={prevPage}/>   {page}   <MdArrowForwardIos onClick={nextPage}/>
+        <span className={styles.pages}><MdOutlineArrowBackIos onClick={prevPage}/>   <label className={styles.pageNumber}>{page}</label>   <MdOutlineArrowForwardIos onClick={nextPage}/></span>
       </TableContainer>
     );
 }
