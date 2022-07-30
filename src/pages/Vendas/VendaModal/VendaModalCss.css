@@ -15,14 +15,6 @@ body {
     border: 1px solid red;
 } */
 
-.Container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0px solid red
-   
-}
-
 .modal-overlay {
     background-color: rgb(219, 214, 214);
     position: fixed;
@@ -89,7 +81,7 @@ p {
 
 
 
-a {
+.closeButton {
     color: blueviolet;
     float: right;
 
