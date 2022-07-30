@@ -1,0 +1,103 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* OUTRO ARQUIVO */
+
+
+/* #div {
+    border: 1px solid red;
+} */
+
+.Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0px solid red
+   
+}
+
+.modal-overlay {
+    background-color: rgb(219, 214, 214);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+table {
+    border: 1px solid gray;
+}
+
+
+th {
+    margin-bottom: 20px;
+}
+
+
+table, th, td {
+    /* border: 1px solid black; */
+    border-collapse: collapse;
+    text-align: left;
+    
+}
+table {
+    width: 480px;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 500px;
+    background-color: white;
+    padding: 10px;
+}
+
+#footer {
+    /* display: inline-block; */
+    justify-content: space-between;
+    width: 480px;
+    padding: 10px;
+}
+
+#divA {
+    display:inline-block;
+    width: 200px;
+}    
+
+#divB {
+    text-align: left;
+    width: 120px;
+    float: right;
+    
+}    
+
+p {
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+
+
+a {
+    color: blueviolet;
+    float: right;
+
+}
+
+
+
+h2 {
+    color: blueviolet;
+    padding: 3px;
+}
