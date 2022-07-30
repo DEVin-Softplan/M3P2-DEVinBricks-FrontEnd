@@ -12,6 +12,7 @@ import { BsFillEyeFill } from "react-icons/bs"
 import { FaWindowClose } from "react-icons/fa"
 import VendaModal from '../VendaModal/VendaModal';
 import { AiFillDelete } from "react-icons/ai"
+import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md"
 
 const venda = {
     comprador: {
@@ -88,6 +89,14 @@ export default function VendasLista() {
         setIsOpen(false);
     }
 
+    const [page, setPage] = useState(1);
+    function nextPage() {
+        setPage(page+1);
+    }
+    function prevPage() {
+        if(page !== 1) setPage(page-1);
+    }
+
     return (
         <TableContainer 
         component={Paper} 
@@ -128,6 +137,7 @@ export default function VendasLista() {
             ))}
           </TableBody>
         </Table>
+        <MdArrowBackIosNew onClick={prevPage}/>   {page}   <MdArrowForwardIos onClick={nextPage}/>
       </TableContainer>
     );
 }
