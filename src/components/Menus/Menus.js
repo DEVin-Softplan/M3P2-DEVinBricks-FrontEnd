@@ -19,7 +19,7 @@ const Menus = (props) => {
           <MenuItem>Usuários</MenuItem>
           <MenuItem>Frete</MenuItem>
           <MenuItem>Compradores</MenuItem>
-          <MenuItem href="/" component={Link}>Sair</MenuItem>
+          <MenuItem href="/Login" component={Link}>Sair</MenuItem>
         </MenuList>
       </Paper>
       <div>
