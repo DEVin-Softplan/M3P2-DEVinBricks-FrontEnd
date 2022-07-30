@@ -38,13 +38,17 @@ const ProdutosLista = (props) => {
     <section className={styles.section}>  
       <header className={styles.header}>
         <div className={styles.firstDivHeader}>          
-          <Header title="Produtos"/>          
-          <Button>Novo Produto</Button>
+          <Header title="Produtos"/> 
+          <Link to="/NovoProduto">
+            <Button>Novo Produto</Button>
+          </Link>         
         </div>                
         <Pesquisa placeholder={"Nome do produto..."}/>
       </header>
 
-      <TableContainer component={Paper} className={styles.table}>
+      <TableContainer 
+        component={Paper} 
+        className={styles.table} sx={{ maxWidth: 800 }}>
         <Table sx={{ minWidth: 250 }}  aria-label="caption table">
           <caption></caption>
           <TableHead>
