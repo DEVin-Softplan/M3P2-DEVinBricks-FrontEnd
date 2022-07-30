@@ -1,20 +1,3 @@
-body {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* OUTRO ARQUIVO */
-
-
-/* #div {
-    border: 1px solid red;
-} */
-
 .modal-overlay {
     background-color: rgb(219, 214, 214);
     position: fixed;
