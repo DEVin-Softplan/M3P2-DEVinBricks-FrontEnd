@@ -118,8 +118,8 @@ export default function VendasLista() {
                 <TableCell align="left">{row.cliente}</TableCell>
                 <TableCell align="left">R$ {row.valor}</TableCell>
                 <TableCell align="center">
-                    <a><AiFillDelete size={25} /></a>
-                    <a><BsFillEyeFill size={25} onClick={openModal}></BsFillEyeFill></a>
+                    <a className={styles.actionIcon}><AiFillDelete size={25} /></a>
+                    <a className={styles.actionIcon}><BsFillEyeFill size={25} onClick={openModal}></BsFillEyeFill></a>
                         <Modal
                         isOpen={modalisopen}
                         onRequestClose={closeModal}
