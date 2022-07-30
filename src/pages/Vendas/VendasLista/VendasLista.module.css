@@ -1,0 +1,30 @@
+.section{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+    align-items: center;
+    align-content: center;
+  };
+  
+.table{
+    margin: 1rem;
+  }
+
+.Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.actionIcon {
+    color: blueviolet;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.pages {
+    font-size: 0.9rem;
+    float: right;
+    margin: 5px;
+}
