@@ -25,4 +25,6 @@
 
 .pages {
     font-size: 0.9rem;
+    float: right;
+    margin: 5px;
 }
