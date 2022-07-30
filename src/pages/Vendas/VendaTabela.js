@@ -6,7 +6,7 @@ const columns = [
     (data) => <img src={data.row.img} width="40px" ></img>} ,
     { field: 'produto', headerName: 'Produto', width: 130 },
     { field: 'qtd', headerName: 'QTD', width: 130 },
-    { field: 'subTotal', headerName: 'Sub Total', width: 90, },
+    { field: 'subTotal', headerName: 'SubTotal', width: 90, },
 ];
 
 
@@ -18,7 +18,6 @@ export default function VendaTabela({ carrinho }) {
                 rows={carrinho}
                 columns={columns}
                 pageSize={2}
-                // rowsPerPageOptions={[2]}
 
             />
         </div>
