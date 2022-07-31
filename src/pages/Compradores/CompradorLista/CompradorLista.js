@@ -23,13 +23,14 @@ const rows = [
   createData('Ana', '12345-6789', "987654321-00", <Link to='/EditarComprador/300'><RiPencilFill size={30} /><FaCartArrowDown size={30} /></Link>),
 ];
 
-const CompradorLista = () => {
+const CompradorLista = ({ processes }) => {
+
   return (
     <section className={styles.section}>
       <header className={styles.header}>
         <div className={styles.firstDivHeader}>
           <Header title="Compradores" />
-          <Link to="/NovoComprador">
+          <Link to="/NovoComprador/${id}">
             <Button>Novo Comprador</Button>
           </Link>
         </div>
@@ -51,7 +52,7 @@ const CompradorLista = () => {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.name}>
+              <TableRow key={row.id}>
                 <TableCell component="th" scope="row">{row.nome}</TableCell>
                 <TableCell align="right">{row.telefone}</TableCell>
                 <TableCell align="right">{row.cpf}</TableCell>

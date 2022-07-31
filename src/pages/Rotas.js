@@ -19,7 +19,7 @@ const Rotas = () => {
         <Route path="/VendaProduto" exact element={<VendaProduto />} />
         <Route path="/VendaResumo" exact element={<VendaResumo />} />
         <Route path="/Compradores" exact element={<Compradores />} />
-        <Route path="/EditarComprador/:idComprador" exact element={<CompradorForm />} />
+        <Route path="/NovoComprador/:id" exact element={<CompradorForm />} />
 
       </Routes>
     </BrowserRouter>
