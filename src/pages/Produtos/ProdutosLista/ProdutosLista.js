@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -13,10 +13,12 @@ import Header from '../../../components/Header/Header';
 import Pesquisa from '../../../components/Pesquisa';
 import Button from '../../../components/Button';
 import { TextField } from '@mui/material';
+import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md";
 
-const handleEditProduc = () => {
 
-};
+
+
+import { getAllProdutos } from './../../../test/mock/ProdutosMock';
 
 function createData(
   status,
@@ -33,7 +35,35 @@ const rows = [
   createData('ATIVO', 'CIMENTO', "R$ 556,00", <Link to='/EditarProduto/300'><RiPencilFill size={30}/></Link>),
 ];
 
+
 const ProdutosLista = (props) => {
+
+  const listaProdutos = useRef([]);
+  const maxQtdPagina = Math.ceil(listaProdutos.current.length / 10);
+
+  const [produtosFiltrado, setProdutosFiltrado] = useState([]);
+  const [termoBusca, setTermoBusca] = useState("");
+  const [pagina, setPagina] = useState(1);
+
+  useEffect(()=>{(
+    async ()=>{
+      const list = await getAllProdutos();      
+      listaProdutos.current = list;
+      setProdutosFiltrado(filtrarListaPorPagina(listaProdutos.current, pagina));               
+    })();
+  },[]);
+  
+  const filtrarListaPorTermoBusca = (lista, termo) => {
+    return lista.filter((listaProdutos) => {
+      return new RegExp(termo, "ig").test(listaProdutos.Nome);
+    });
+  };
+
+  const filtrarListaPorPagina = (lista, pagina) =>{
+    const qtd_Itens = 10;
+    return lista.slice((pagina * qtd_Itens) - qtd_Itens, pagina * qtd_Itens);
+  }
+  
   return(    
     <section className={styles.section}>  
       <header className={styles.header}>
@@ -48,24 +78,30 @@ const ProdutosLista = (props) => {
 
       <TableContainer 
         component={Paper} 
-        className={styles.table} sx={{ maxWidth: 800 }}>
-        <Table sx={{ minWidth: 250 }}  aria-label="caption table">
-          <caption></caption>
+        className={styles.table} sx={{ maxWidth: 700 }}>
+        <Table sx={{ minWidth: 240 }}  aria-label="caption table">
+          <caption>
+            <footer className={styles.footerPage}>
+              <button className={styles.buttonInfoPage}><MdArrowBackIos/></button>
+              <h5> Página {pagina}</h5>
+              <button className={styles.buttonInfoPage}><MdArrowForwardIos/></button>
+            </footer>
+          </caption>
           <TableHead>
             <TableRow>
               <TableCell>#</TableCell>
-              <TableCell align="right">Nome</TableCell>
-              <TableCell align="right">Valor p/ caixa(g)</TableCell>
-              <TableCell align="right">Ações</TableCell>
+              <TableCell align="center">Nome</TableCell>
+              <TableCell align="center">Valor p/ caixa(g)</TableCell>
+              <TableCell align="center">Ações</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.name}>
-                <TableCell component="th" scope="row">{row.status}</TableCell>
-                <TableCell align="right">{row.nomeProduto}</TableCell>
-                <TableCell align="right">{row.preco}</TableCell>
-                <TableCell align="right">{row.acao}</TableCell>                
+            {produtosFiltrado.map((item, index) => (
+              <TableRow key={item.Id}>
+                <TableCell component="th" scope="row">{(item.Ativo)? "Ativo" : "Descontinuado"}</TableCell>
+                <TableCell align="center">{item.Nome}</TableCell>
+                <TableCell align="center">{item.Valor}</TableCell>
+                <TableCell align="right"><Link to={`EditarProduto/${item.Id}`}><RiPencilFill size={30}/></Link></TableCell>                
               </TableRow>
             ))}
           </TableBody>

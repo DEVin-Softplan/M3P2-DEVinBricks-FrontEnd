@@ -1,0 +1,38 @@
+.main{
+  display: flex;
+  /* justify-content: space-between; */
+  width: 100%;
+  height: 100vh;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;  
+    width: 100%;
+    max-width: 700px;
+    
+  }
+  
+  .firstDivHeader{
+    display: flex;  
+    align-items: center;
+    justify-content: space-evenly;
+    /* background-color: aquamarine; */
+  }
+  
+  .section{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem;
+    /* justify-content: space-around; */
+    align-items: center;
+    align-content: center;
+  
+    /* background-color: blueviolet; */
+  };
+  
+  .table{
+    margin: 1rem;
+  }
+  
