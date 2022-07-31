@@ -1,18 +1,21 @@
 import React from 'react';
 import style from './ProdutosForm.module.css'
 import Header from '../../../components/Header/Header';
-import { Form } from 'formik';
 import Button from '../../../components/Button';
+import Menus from '../../../components/Menus';
+
 
 import { 
   TextField, 
   // Button, 
   TextareaAutosize, 
   Switch } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const ProdutosForm = () => {
   return (
     <>
+    <Menus />
     <Header title="Novo Produto"/>
     <section className={style.container}>
       <img 
@@ -39,7 +42,7 @@ const ProdutosForm = () => {
       </form>
 
       <footer className={style.footer}>
-        <Button variant="contained">Voltar</Button>
+        <Link to="/Produtos"><Button variant="contained">Voltar</Button></Link>        
         <Button variant="contained">Cadastrar</Button>
       </footer>      
     </section>  
