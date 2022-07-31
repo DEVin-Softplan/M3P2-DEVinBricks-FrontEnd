@@ -10,7 +10,6 @@
   display: flex;  
   align-items: center;
   justify-content: space-evenly;
-  /* background-color: aquamarine; */
 }
 
 .section{
@@ -21,10 +20,20 @@
   /* justify-content: space-around; */
   align-items: center;
   align-content: center;
-
-  /* background-color: blueviolet; */
 };
 
 .table{
   margin: 1rem;
+}
+
+
+.footerPage{
+  display: flex;
+  align-items: center;
+}
+
+.buttonInfoPage{
+  display: flex;
+  align-items: center;
+  margin: 0.3rem;
 }
