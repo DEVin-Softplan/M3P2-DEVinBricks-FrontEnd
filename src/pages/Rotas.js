@@ -11,16 +11,14 @@ const Rotas = () => {
   return (
     <BrowserRouter>    
       <Routes>
-
-
         <Route path="/" exact element ={<Home />} /> 
         <Route path="/Login" exact element={<Login />} />
         <Route path="/Produtos" exact element={<Produtos />} />
         <Route path="/EditarProduto/:idProduto" exact element ={<ProdutosForm />} />        
+        <Route path="/NovoProduto" exact element ={<ProdutosForm />} />        
         <Route path="/VendaProduto" exact element={<VendaProduto />} />
         <Route path="/VendaResumo" exact element={<VendaResumo />} />
         <Route path="/VendaEntrega" exact element={<VendaEntrega />} />
-
       </Routes>
     </BrowserRouter>
   );
