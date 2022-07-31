@@ -17,7 +17,7 @@ export const itemsMenus = [
     "Rota": "/Frete"
   },
   {
-    "Descricao": "Comnpradores", 
+    "Descricao": "Compradores", 
     "Rota": "/Compradores"
   },
   {
