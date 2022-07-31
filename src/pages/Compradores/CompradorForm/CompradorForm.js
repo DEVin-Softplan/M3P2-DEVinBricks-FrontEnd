@@ -3,19 +3,10 @@ import React, { useState } from 'react';
 import Button from '../../../components/Button';
 import Header from '../../../components/Header/Header';
 import styles from './CompradorForm.module.css';
-import axios from 'axios'
+import { cliente } from '../../../services/BaseService';
+import Menus from '../../../components/Menus';
 
-const config = {
-  headers: {
-    'Content-Type': 'application/json;charset=utf-8',
-    'Access-Control-Allow-Origin': '*'
-  }
-};
-const cliente = axios.create({
-  baseURL: "https://localhost:7171",
-})
-
-const CompradorForm = ({ method = 'POST', id = '', callback = () => { } }) => {
+const CompradorForm = () => {
 
   const [comprador, setcomprador] = useState({
     nome: '',
@@ -35,7 +26,7 @@ const CompradorForm = ({ method = 'POST', id = '', callback = () => { } }) => {
   }
 
   const sendComprador = async () => {
-    const response = await cliente.post(`/api/Comprador`, comprador, config)
+    const response = await cliente.post(`/api/Comprador`, comprador)
     const { data: { message } } = response;
     console.log(message);
 
@@ -43,6 +34,7 @@ const CompradorForm = ({ method = 'POST', id = '', callback = () => { } }) => {
 
   return (
     <>
+      <Menus />
       <Header title="Novo Comprador" />
       <section className={styles.container}>
         <form className={styles.form}>
