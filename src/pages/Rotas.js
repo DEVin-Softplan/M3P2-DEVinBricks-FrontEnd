@@ -5,7 +5,8 @@ import VendaResumo from './NovaVenda/VendaResumo';
 import Produtos from './Produtos/Produtos';
 import ProdutosForm from './Produtos/ProdutosForm';
 import Home from './Home/Home';
-import VendaEntrega from './Vendas/VendaEntrega';
+import VendaEntrega from './NovaVenda/VendaEntrega';
+import Vendas from './Vendas/Vendas';
 
 const Rotas = () => {
   return (
@@ -19,6 +20,7 @@ const Rotas = () => {
         <Route path="/VendaProduto" exact element={<VendaProduto />} />
         <Route path="/VendaResumo" exact element={<VendaResumo />} />
         <Route path="/VendaEntrega" exact element={<VendaEntrega />} />
+        <Route path="/MinhasEntregas" exact element={<Vendas />} />
       </Routes>
     </BrowserRouter>
   );
