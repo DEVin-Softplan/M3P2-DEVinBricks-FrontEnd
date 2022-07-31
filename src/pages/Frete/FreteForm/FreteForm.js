@@ -1,6 +1,7 @@
 import { forwardRef, React, useEffect, useState } from "react";
 import style from "./FreteForm.module.css";
 import {
+	Alert,
 	Button,
 	CircularProgress,
 	Dialog,
@@ -75,7 +76,7 @@ const FreteForm = () => {
 	useEffect(() => {
 		(async () => {
 			setLoading(true);
-			setListaEstados(await getEstados());
+			setListaEstados((await getEstados()) || []);
 			setLoading(false);
 		})();
 	}, []);
@@ -120,6 +121,10 @@ const FreteForm = () => {
 				value: "",
 			},
 		});
+	};
+
+	const refreshPage = () => {
+		window.location.reload();
 	};
 
 	const handleSubmit = async () => {
@@ -169,7 +174,20 @@ const FreteForm = () => {
 				<Header title="Nova regra" />
 				<section className={style.container}>
 					{loading && <CircularProgress />}
-					{!loading && (
+					{!loading && listaEstados.length == 0 && (
+						<Alert
+							severity="error"
+							action={
+								<Button color="inherit" size="small" onClick={refreshPage}>
+									Recarregar
+								</Button>
+							}
+						>
+							Ocorreu um erro ao carregar os dados página. Tente recarregar
+							novamente clicando no botão.
+						</Alert>
+					)}
+					{!loading && listaEstados.length > 0 && (
 						<form className={style.form}>
 							<TextField
 								id="estado"
@@ -208,7 +226,7 @@ const FreteForm = () => {
 						</form>
 					)}
 
-					{!loading && (
+					{!loading && listaEstados.length > 0 && (
 						<footer className={style.footer}>
 							<Button
 								color="secondary"
