@@ -18,7 +18,7 @@
 }
 
 .actionIcon {
-    color: blueviolet;
+    color: var(--blue);
     margin-left: 5%;
     margin-right: 5%;
 }
