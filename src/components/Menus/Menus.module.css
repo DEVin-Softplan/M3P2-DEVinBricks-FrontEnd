@@ -1,12 +1,33 @@
-.menu{
-  color: blueviolet;
-  height: 100%;
-}
-
 .aside{
-  background-color: blueviolet;
-  width: 8rem;
+  background-color: var(--blue);
+  max-width: 10rem;
   color: white;
   text-decoration: none;
-  padding: 3rem;
+  padding: 1.3rem;
+}
+
+.ul{
+  width: 100%;
+}
+.li{
+  list-style: none;
+}
+
+.items{
+  color: white;
+  width: 100%;
+  text-decoration: none;
+  border: solid 1 white;
+  height: 2rem;
+  transition: 0.5s;
+  text-align: left;
+  align-items: center;
+  justify-items: center;
+  height: 50px;
+  font-size: large;
+  display: flex;
+}
+.items:hover{
+  background-color: var(--blue-dark);
+  border-radius: 3px;
 }

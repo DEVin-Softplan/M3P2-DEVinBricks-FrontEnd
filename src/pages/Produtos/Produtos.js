@@ -5,9 +5,15 @@ import Menus from '../../components/Menus';
 
 const Produtos = () => {
   //Make the rendering as deal with the requisition (form or list)
+
+  const handerProductPage = () => {
+    return <ProdutosLista />;
+  }
+
   return (
-    <main className={styles.main}>      
-      <ProdutosLista />
+    <main className={styles.main}>
+      <Menus />      
+      {handerProductPage()}
     </main>
   );
 };
