@@ -9,23 +9,26 @@ import VendaEntrega from './NovaVenda/VendaEntrega';
 import Vendas from './Vendas/Vendas';
 import Compradores from './Compradores'
 import CompradorForm from './Compradores/CompradorForm';
+import VendaEntrega from './NovaVenda/VendaEntrega';
+import Vendas from './Vendas/Vendas';
 
 const Rotas = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" exact element ={<Home />} />
+        <Route path="/" exact element ={<Home />} /> 
         <Route path="/Login" exact element={<Login />} />
         <Route path="/Produtos" exact element={<Produtos />} />
         <Route path="/EditarProduto/:idProduto" exact element ={<ProdutosForm />} />
         <Route path="/NovoProduto" exact element ={<ProdutosForm />} />  
+        <Route path="/EditarProduto/:idProduto" exact element ={<ProdutosForm />} />        
+        <Route path="/NovoProduto" exact element ={<ProdutosForm />} />        
         <Route path="/VendaProduto" exact element={<VendaProduto />} />
         <Route path="/VendaResumo" exact element={<VendaResumo />} />
         {/* <Route path="/VendaEntrega" exact element={<VendaEntrega />} /> */}
         <Route path="/MinhasEntregas" exact element={<Vendas />} />
         <Route path="/Compradores" exact element={<Compradores />} />
         <Route path="/NovoComprador/:id" exact element={<CompradorForm />} />
-
       </Routes>
     </BrowserRouter>
   );
