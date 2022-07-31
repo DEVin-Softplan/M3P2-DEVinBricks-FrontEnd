@@ -65,7 +65,7 @@ p {
 
 
 .closeButton {
-    color: blueviolet;
+    color: var(--blue);
     float: right;
 
 }
@@ -73,6 +73,6 @@ p {
 
 
 h2 {
-    color: blueviolet;
+    color: var(--blue);
     padding: 3px;
 }

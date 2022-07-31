@@ -5,21 +5,25 @@ import Header from '../../components/Header/Header';
 import Pesquisa from '../../components/Pesquisa';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Menus from '../../components/Menus';
 
 const Vendas = () => {
   return (
-      <div className={styles.container}>
-        <ToastContainer />
-        <div className={styles.headerContainer}>
-          <Header title="Minhas Entregas" />
+    <>
+      <Menus />
+        <div className={styles.container}>
+          <ToastContainer />
+          <div className={styles.headerContainer}>
+            <Header title="Minhas Entregas" />
+          </div>
+          <Pesquisa
+            placeholder="Cliente, CPF..."
+            onChange={null}
+            onSubmit={null}
+          />
+          <VendasLista/>
         </div>
-        <Pesquisa
-          placeholder="Cliente, CPF..."
-          onChange={null}
-          onSubmit={null}
-        />
-        <VendasLista/>
-      </div>
+    </>
   )
 };
 

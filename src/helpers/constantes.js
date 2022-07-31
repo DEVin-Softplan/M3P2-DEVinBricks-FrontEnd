@@ -1,8 +1,12 @@
 
 export const itemsMenus = [
   {
-    "Descricao": "Vendas", 
+    "Descricao": "Nova Venda", 
     "Rota": "/Vendas"
+  },
+  {
+    "Descricao": "Vendas", 
+    "Rota": "/MinhasEntregas"
   },
   {
     "Descricao": "Produtos", 
