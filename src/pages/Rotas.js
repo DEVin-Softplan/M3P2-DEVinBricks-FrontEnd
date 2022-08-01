@@ -8,6 +8,8 @@ import Home from "./Home/Home";
 import Vendas from "./Vendas/Vendas";
 import Usuarios from "./Usuarios";
 import UsuariosForm from "./Usuarios/UsuarioForm/UsuariosForm";
+import Comprador from "./Compradores/Comprador";
+import CompradorForm from "./Compradores/Comprador";
 
 const Rotas = () => {
   return (
@@ -28,6 +30,10 @@ const Rotas = () => {
         <Route path="/Usuarios" exalct element={<Usuarios />} />
         <Route path="/UsuariosForm" exalct element={<UsuariosForm />} />
         <Route path="/NovoUsuario" exalct element={<UsuariosForm />} />
+        <Route path="/Frete/NovaRegra" exact element={<FreteForm />} />
+				<Route path="/MinhasEntregas" exact element={<Vendas />} />
+        <Route path="/Compradores" exact element={<Comprador />} />
+        <Route path="/NovoComprador" exact element={<CompradorForm />} />
       </Routes>
     </BrowserRouter>
   );
