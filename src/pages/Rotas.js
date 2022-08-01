@@ -8,7 +8,7 @@ import VendaProduto from "./NovaVenda/VendaProduto/VendaProduto";
 import VendaResumo from "./NovaVenda/VendaResumo";
 import Vendas from "./Vendas/Vendas";
 import Comprador from "./Compradores/Comprador";
-import CompradorForm from "./Compradores/CompradorForm";
+import CompradorForm from "./Compradores/Comprador";
 
 const Rotas = () => {
   return (
