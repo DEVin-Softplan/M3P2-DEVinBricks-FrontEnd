@@ -1,17 +1,27 @@
 #root{
     padding: 10px;
 }
-.textField{
-    margin: 10px;
-    background-color: red;
-}
+
 
 .Typography{
-        color:blueviolet;
-        stroke: black;
-        font-weight: bold;
+    color: var(--blue);    
 }
 
 .btnconfirmar{
-    background-color: blueviolet;
+    background-color:  var(--blue);
 }
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 15px 0;
+  }
+
+
+  .valoresCompra{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+  }

@@ -1,8 +1,14 @@
+import { VendaStorage } from './contexts/VendaContext';
 import Rotas from './pages/Rotas';
+import './index.css';
 
 const App = () => { 
-  return (
-    <Rotas />
+  return (   
+    <div className='divlanding'>
+      <VendaStorage>                
+        <Rotas />
+      </VendaStorage>
+    </div>     
   );
 };
 

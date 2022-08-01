@@ -1,26 +1,39 @@
 .header{
   display: flex;
-  flex-direction: column;
-  margin: 20px;
-  justify-content: space-around;
+  flex-direction: column;  
+  width: 100%;
+  max-width: 700px;
+  
 }
 
 .firstDivHeader{
-  display: flex;
-  justify-content: space-between;
-  margin: 1rem;
+  display: flex;  
+  align-items: center;
+  justify-content: space-evenly;
 }
 
-.main{
-  display: flexbox;
-  
-  /* max-width: 60%; */
-
-  align-self: center;
-  justify-content: center;
+.section{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem;
+  /* justify-content: space-around; */
+  align-items: center;
+  align-content: center;
 };
 
 .table{
   margin: 1rem;
-  background-color: aquamarine;
+}
+
+
+.footerPage{
+  display: flex;
+  align-items: center;
+}
+
+.buttonInfoPage{
+  display: flex;
+  align-items: center;
+  margin: 0.3rem;
 }
