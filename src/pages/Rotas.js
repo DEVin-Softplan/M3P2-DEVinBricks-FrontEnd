@@ -5,6 +5,7 @@ import VendaResumo from './NovaVenda/VendaResumo';
 import Produtos from './Produtos/Produtos';
 import ProdutosForm from './Produtos/ProdutosForm';
 import Home from './Home/Home';
+import VendaEntrega from './NovaVenda/VendaEntrega';
 
 const Rotas = () => {
   return (
@@ -16,6 +17,7 @@ const Rotas = () => {
         <Route path="/EditarProduto/:idProduto" exact element ={<ProdutosForm />} />        
         <Route path="/VendaProduto" exact element={<VendaProduto />} />
         <Route path="/VendaResumo" exact element={<VendaResumo />} />
+        <Route path="/VendaEntrega" exact element={<VendaEntrega />} />
       </Routes>
     </BrowserRouter>
   );
