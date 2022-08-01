@@ -8,8 +8,8 @@ import { motion } from 'framer-motion';
 
 //////////////////////////////////
 const RootStyle = styled('div')({
-	background: 'rgb(249, 250, 251)',
 	height: '100vh',
+	width: '100vw',
 	display: 'grid',
 	placeItems: 'center',
 });
@@ -53,7 +53,7 @@ const Login = ({ setAuth }) => {
 					<HeadingStyle component={motion.div} {...fadeInUp}>
 						<Logo />
 						<Typography sx={{ color: 'text.secondary', mb: 5 }}>
-							Login to your account
+							Faça login na sua conta
 						</Typography>
 					</HeadingStyle>
 
@@ -66,16 +66,16 @@ const Login = ({ setAuth }) => {
 						align="center"
 						sx={{ mt: 3 }}
 					>
-						Dont have an account?{' '}
+						Não tem conta?{' '}
 						<Link
 							sx={{
-								color: 'blueviolet',
+								color: '#5965E0',
 							}}
 							variant="subtitle2"
 							component={RouterLink}
 							to="/signup"
 						>
-							Sign up
+							Cadastre-se
 						</Link>
 					</Typography>
 				</ContentStyle>

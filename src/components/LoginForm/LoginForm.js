@@ -36,8 +36,8 @@ const LoginForm = ({ setAuth }) => {
 	const [showPassword, setShowPassword] = useState(false);
 
 	const LoginSchema = Yup.object().shape({
-		email: Yup.string().email('Provide a valid email address').required('Email is required'),
-		password: Yup.string().required('Password is required'),
+		email: Yup.string().email('Adicione um Email válido').required('Email é obrigatório'),
+		password: Yup.string().required('Senha é obrigatória'),
 	});
 
 	const formik = useFormik({
@@ -51,6 +51,7 @@ const LoginForm = ({ setAuth }) => {
 			console.log('submitting...');
 			setTimeout(() => {
 				console.log('submited!!');
+				console.log(getFieldProps().value);
 				setAuth(true);
 				navigate(from, { replace: true });
 			}, 2000);
@@ -84,7 +85,7 @@ const LoginForm = ({ setAuth }) => {
 							fullWidth
 							autoComplete="username"
 							type="email"
-							label="Email Address"
+							label="Email"
 							{...getFieldProps('email')}
 							error={Boolean(touched.email && errors.email)}
 							helperText={touched.email && errors.email}
@@ -94,7 +95,7 @@ const LoginForm = ({ setAuth }) => {
 							fullWidth
 							autoComplete="current-password"
 							type={showPassword ? 'text' : 'password'}
-							label="Password"
+							label="Senha"
 							{...getFieldProps('password')}
 							error={Boolean(touched.password && errors.password)}
 							helperText={touched.password && errors.password}
@@ -127,28 +128,28 @@ const LoginForm = ({ setAuth }) => {
 								control={
 									<Checkbox
 										sx={{
-											color: 'blueviolet',
+											color: '#5965E0',
 											'&.Mui-checked': {
-												color: 'blueviolet',
+												color: '#5965E0',
 											},
 										}}
 										{...getFieldProps('remember')}
 										checked={values.remember}
 									/>
 								}
-								label="Remember me"
+								label="Lembre de mim"
 							/>
 
 							<Link
 								sx={{
-									color: 'blueviolet',
+									color: '#5965E0',
 								}}
 								component={RouterLink}
 								variant="subtitle2"
 								to="#"
 								underline="hover"
 							>
-								Forgot password?
+								Esqueceu a senha?
 							</Link>
 						</Stack>
 
@@ -159,10 +160,10 @@ const LoginForm = ({ setAuth }) => {
 							variant="contained"
 							loading={isSubmitting}
 							sx={{
-								backgroundColor: 'blueviolet',
+								backgroundColor: '#5965E0',
 								'&:hover': {
 									color: 'black',
-									backgroundColor: '#ce93d8',
+									backgroundColor: '#7982d9',
 								},
 							}}
 						>
