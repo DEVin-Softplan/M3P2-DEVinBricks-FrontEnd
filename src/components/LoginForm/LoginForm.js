@@ -51,7 +51,6 @@ const LoginForm = ({ setAuth }) => {
 			console.log('submitting...');
 			setTimeout(() => {
 				console.log('submited!!');
-				console.log(getFieldProps().value);
 				setAuth(true);
 				navigate(from, { replace: true });
 			}, 2000);
