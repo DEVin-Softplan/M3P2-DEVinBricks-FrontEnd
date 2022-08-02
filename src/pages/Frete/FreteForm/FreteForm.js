@@ -174,7 +174,7 @@ const FreteForm = () => {
 				<Header title="Nova regra" />
 				<section className={style.container}>
 					{loading && <CircularProgress />}
-					{!loading && listaEstados.length == 0 && (
+					{!loading && listaEstados.length === 0 && (
 						<Alert
 							severity="error"
 							action={
