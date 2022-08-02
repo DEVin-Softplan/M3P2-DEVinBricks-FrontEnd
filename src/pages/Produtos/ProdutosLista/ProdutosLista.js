@@ -14,8 +14,7 @@ import Pesquisa from '../../../components/Pesquisa';
 import Button from '../../../components/Button';
 import { TextField } from '@mui/material';
 import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md";
-
-
+import PageInfo from '../../../components/PageInfo';
 
 
 import { getAllProdutos } from './../../../test/mock/ProdutosMock';
@@ -81,11 +80,7 @@ const ProdutosLista = (props) => {
         className={styles.table} sx={{ maxWidth: 700 }}>
         <Table sx={{ minWidth: 240 }}  aria-label="caption table">
           <caption>
-            <footer className={styles.footerPage}>
-              <button className={styles.buttonInfoPage}><MdArrowBackIos/></button>
-              <h5> Página {pagina}</h5>
-              <button className={styles.buttonInfoPage}><MdArrowForwardIos/></button>
-            </footer>
+            <PageInfo />
           </caption>
           <TableHead>
             <TableRow>
