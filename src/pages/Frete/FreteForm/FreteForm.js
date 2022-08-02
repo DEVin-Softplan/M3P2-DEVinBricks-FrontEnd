@@ -199,6 +199,7 @@ const FreteForm = () => {
 								error={values.estado.error}
 								helperText={values.estado.error ? "Selecione um estado" : " "}
 								className={style.input}
+								inputProps={{ "data-testid": "estados" }}
 								select
 								value={values.estado.value}
 								sx={{ height: "70px" }}
@@ -234,10 +235,15 @@ const FreteForm = () => {
 								onClick={() => {
 									navigate("/");
 								}}
+								data-testid="voltar"
 							>
 								Voltar
 							</Button>
-							<Button variant="contained" onClick={handleSubmit}>
+							<Button
+								variant="contained"
+								onClick={handleSubmit}
+								data-testid="cadastrar"
+							>
 								Cadastrar
 							</Button>
 						</footer>
