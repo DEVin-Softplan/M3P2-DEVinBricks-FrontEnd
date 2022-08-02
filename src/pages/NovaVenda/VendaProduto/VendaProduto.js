@@ -3,6 +3,7 @@ import styles from './VendaProduto.module.css';
 import Header from '../../../components/Header/Header';
 import Button from '../../../components/Button';
 import Pesquisa from '../../../components/Pesquisa';
+import Menus from '../../../components/Menus';
 import CardProduto from './CardProduto';
 import AreaPesquisa from './AreaPesquisa';
 import { ToastContainer, toast } from 'react-toastify';
@@ -65,37 +66,41 @@ const VendaProduto = () => {
   }, [carrinho]);
 
   return (
-    <div className={styles.container}>
-      <ToastContainer />
-      <div className={styles.headerContainer}>
-        <Header title="Nova venda: Produtos" />
-        <span>0 itens | R$ 0,00</span>
+    <>
+      <Menus />
+
+      <div className={styles.container}>
+        <ToastContainer />
+        <div className={styles.headerContainer}>
+          <Header title="Nova venda: Produtos" />
+          <span>0 itens | R$ 0,00</span>
+        </div>
+
+        <Pesquisa
+          placeholder="Pesquise um produto"
+          onChange={(value) => setPesquisaProduto(value)}
+          onSubmit={pesquisarProdutos}
+        />
+
+        {listaProdutos.length === 0 ? (
+          <AreaPesquisa />
+        ) : (
+          listaProdutos.map((produto) => (
+            <CardProduto
+              key={produto.id}
+              produto={produto}
+              adicionarProduto={adicionarProduto}
+            />
+          ))
+        )}
+
+        <div className={styles.footer}>
+          <Button disabled={desabilitarBotao} onClick={proximaEtapa}>
+            Próxima etapa
+          </Button>
+        </div>
       </div>
-
-      <Pesquisa
-        placeholder="Pesquise um produto"
-        onChange={(value) => setPesquisaProduto(value)}
-        onSubmit={pesquisarProdutos}
-      />
-
-      {listaProdutos.length === 0 ? (
-        <AreaPesquisa />
-      ) : (
-        listaProdutos.map((produto) => (
-          <CardProduto
-            key={produto.id}
-            produto={produto}
-            adicionarProduto={adicionarProduto}
-          />
-        ))
-      )}
-
-      <div className={styles.footer}>
-        <Button disabled={desabilitarBotao} onClick={proximaEtapa}>
-          Próxima etapa
-        </Button>
-      </div>
-    </div>
+    </>
   );
 };
 
