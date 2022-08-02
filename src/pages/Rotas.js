@@ -10,33 +10,34 @@ import Usuarios from "./Usuarios";
 import UsuariosForm from "./Usuarios/UsuarioForm/UsuariosForm";
 import Comprador from "./Compradores/Comprador";
 import CompradorForm from "./Compradores/Comprador";
+import FreteForm from "./Frete/FreteForm/FreteForm";
 
 const Rotas = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" exact element={<Home />} />
-        <Route path="/Login" exact element={<Login />} />
-        <Route path="/Produtos" exact element={<Produtos />} />
-        <Route
-          path="/EditarProduto/:idProduto"
-          exact
-          element={<ProdutosForm />}
-        />
-        <Route path="/NovoProduto" exact element={<ProdutosForm />} />
-        <Route path="/VendaProduto" exact element={<VendaProduto />} />
-        <Route path="/VendaResumo" exact element={<VendaResumo />} />
-        <Route path="/MinhasEntregas" exact element={<Vendas />} />
-        <Route path="/Usuarios" exalct element={<Usuarios />} />
-        <Route path="/UsuariosForm" exalct element={<UsuariosForm />} />
-        <Route path="/NovoUsuario" exalct element={<UsuariosForm />} />
-        <Route path="/Frete/NovaRegra" exact element={<FreteForm />} />
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" exact element={<Home />} />
+				<Route path="/Login" exact element={<Login />} />
+				<Route path="/Produtos" exact element={<Produtos />} />
+				<Route
+					path="/EditarProduto/:idProduto"
+					exact
+					element={<ProdutosForm />}
+				/>
+				<Route path="/NovoProduto" exact element={<ProdutosForm />} />
+				<Route path="/VendaProduto" exact element={<VendaProduto />} />
+				<Route path="/VendaResumo" exact element={<VendaResumo />} />
 				<Route path="/MinhasEntregas" exact element={<Vendas />} />
-        <Route path="/Compradores" exact element={<Comprador />} />
-        <Route path="/NovoComprador" exact element={<CompradorForm />} />
-      </Routes>
-    </BrowserRouter>
-  );
+				<Route path="/Usuarios" exact element={<Usuarios />} />
+				<Route path="/UsuariosForm" exact element={<UsuariosForm />} />
+				<Route path="/NovoUsuario" exact element={<UsuariosForm />} />
+				<Route path="/Frete/NovaRegra" exact element={<FreteForm />} />
+				<Route path="/MinhasEntregas" exact element={<Vendas />} />
+				<Route path="/Compradores" exact element={<Comprador />} />
+				<Route path="/NovoComprador" exact element={<CompradorForm />} />
+			</Routes>
+		</BrowserRouter>
+	);
 };
 
 export default Rotas;
