@@ -145,7 +145,7 @@ const LoginForm = () => {
 							justifyContent="space-between"
 							sx={{ my: 2 }}
 						>
-							<Link
+							{/* <Link
 								sx={{
 									color: '#5965E0',
 								}}
@@ -155,7 +155,7 @@ const LoginForm = () => {
 								underline="hover"
 							>
 								Esqueceu a senha?
-							</Link>
+							</Link> */}
 						</Stack>
 
 						<LoadingButton
