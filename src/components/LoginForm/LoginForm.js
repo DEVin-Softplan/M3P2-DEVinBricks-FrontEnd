@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { loginUser } from '../../services/AuthService';
 import Swal from 'sweetalert2';
-import { Box, IconButton, InputAdornment, Link, Stack, TextField } from '@mui/material';
+import { Box, IconButton, InputAdornment, Stack, TextField } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
@@ -33,10 +33,10 @@ const LoginForm = () => {
 		if (auth) {
 			navigate('/');
 		}
-	}, [auth]);
+	});
 
 	const LoginSchema = Yup.object().shape({
-		login: Yup.string().required('login é obrigatório'),
+		login: Yup.string().required('Login é obrigatório'),
 		senha: Yup.string().required('Senha é obrigatória'),
 	});
 
@@ -100,6 +100,8 @@ const LoginForm = () => {
 							type="text"
 							label="Login"
 							{...getFieldProps('login')}
+							error={Boolean(touched.login && errors.login)}
+							helperText={touched.login && errors.login}
 						/>
 
 						<TextField
@@ -108,8 +110,8 @@ const LoginForm = () => {
 							type={showPassword ? 'text' : 'password'}
 							label="Senha"
 							{...getFieldProps('senha')}
-							error={Boolean(touched.password && errors.password)}
-							helperText={touched.password && errors.password}
+							error={Boolean(touched.senha && errors.senha)}
+							helperText={touched.senha && errors.senha}
 							InputProps={{
 								endAdornment: (
 									<InputAdornment position="end">
@@ -135,7 +137,7 @@ const LoginForm = () => {
 							justifyContent="space-between"
 							sx={{ my: 2 }}
 						>
-							<Link
+							{/* <Link
 								sx={{
 									color: '#5965E0',
 								}}
@@ -145,7 +147,7 @@ const LoginForm = () => {
 								underline="hover"
 							>
 								Esqueceu a senha?
-							</Link>
+							</Link> */}
 						</Stack>
 
 						<LoadingButton

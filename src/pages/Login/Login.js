@@ -73,7 +73,7 @@ const Login = ({ setAuth }) => {
 							}}
 							variant="subtitle2"
 							component={RouterLink}
-							to="/signup"
+							to="/NovoUsuario"
 						>
 							Cadastre-se
 						</Link>
