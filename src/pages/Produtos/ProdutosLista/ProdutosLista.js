@@ -16,24 +16,7 @@ import { TextField } from '@mui/material';
 import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md";
 import PageInfo from '../../../components/PageInfo';
 
-
 import { getAllProdutos } from './../../../test/mock/ProdutosMock';
-
-function createData(
-  status,
-  nomeProduto,
-  preco,
-  acao,
-) {
-  return { status, nomeProduto, preco, acao };
-}
-
-const rows = [
-  createData('ATIVO', 'CIMENTO', "R$ 323,00", <Link to='/EditarProduto/100'><RiPencilFill size={30}/></Link>),
-  createData('ATIVO', 'CIMENTO', "R$ 234,00", <Link to='/EditarProduto/200'><RiPencilFill size={30}/></Link>),
-  createData('ATIVO', 'CIMENTO', "R$ 556,00", <Link to='/EditarProduto/300'><RiPencilFill size={30}/></Link>),
-];
-
 
 const ProdutosLista = (props) => {
 
