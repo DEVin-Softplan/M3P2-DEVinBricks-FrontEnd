@@ -1,16 +1,18 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './Login';
-import VendaProduto from './NovaVenda/VendaProduto/VendaProduto';
-import VendaResumo from './NovaVenda/VendaResumo';
-import Produtos from './Produtos/Produtos';
-import ProdutosForm from './Produtos/ProdutosForm';
-import Home from './Home/Home';
-import Vendas from './Vendas/Vendas';
-import Usuarios from './Usuarios';
-import UsuariosForm from './Usuarios/UsuarioForm/UsuariosForm';
-import Comprador from './Compradores/Comprador';
-import CompradorForm from './Compradores/Comprador';
-import FreteForm from './Frete/FreteForm/FreteForm';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./Login";
+import VendaProduto from "./NovaVenda/VendaProduto/VendaProduto";
+import VendaResumo from "./NovaVenda/VendaResumo";
+import Produtos from "./Produtos/Produtos";
+import ProdutosForm from "./Produtos/ProdutosForm";
+import Home from "./Home/Home";
+import Vendas from "./Vendas/Vendas";
+import Usuarios from "./Usuarios/Usuarios";
+import UsuariosForm from "./Usuarios/UsuariosForm/UsuariosForm";
+import Usuarios from "./Usuarios";
+import UsuariosForm from "./Usuarios/UsuarioForm/UsuariosForm";
+import Comprador from "./Compradores/Comprador";
+import CompradorForm from "./Compradores/Comprador";
+import FreteForm from "./Frete/FreteForm/FreteForm";
 
 const Rotas = () => {
 	return (
