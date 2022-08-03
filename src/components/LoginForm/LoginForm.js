@@ -1,21 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
-
-import {
-	Box,
-	Checkbox,
-	FormControlLabel,
-	IconButton,
-	InputAdornment,
-	Link,
-	Stack,
-	TextField,
-} from '@mui/material';
+import { loginUser } from '../../services/AuthService';
+import Swal from 'sweetalert2';
+import { Box, IconButton, InputAdornment, Link, Stack, TextField } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
+import { useAuth } from '../../contexts/Auth/useAuth';
 
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
@@ -28,32 +21,53 @@ const animate = {
 	},
 };
 
-const LoginForm = ({ setAuth }) => {
+const LoginForm = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const from = location.state?.from?.pathname || '/';
 
 	const [showPassword, setShowPassword] = useState(false);
+	const { setToken, setAuth, auth } = useAuth();
+
+	useEffect(() => {
+		if (auth) {
+			navigate('/');
+		}
+	}, [auth]);
 
 	const LoginSchema = Yup.object().shape({
-		email: Yup.string().email('Adicione um Email válido').required('Email é obrigatório'),
-		password: Yup.string().required('Senha é obrigatória'),
+		login: Yup.string().required('login é obrigatório'),
+		senha: Yup.string().required('Senha é obrigatória'),
 	});
 
 	const formik = useFormik({
 		initialValues: {
-			email: '',
-			password: '',
-			remember: true,
+			login: '',
+			senha: '',
 		},
 		validationSchema: LoginSchema,
-		onSubmit: () => {
-			console.log('submitting...');
-			setTimeout(() => {
-				console.log('submited!!');
+		onSubmit: async () => {
+			const response = await loginUser(values);
+
+			if (response.status === 200) {
 				setAuth(true);
+				setToken(response.token);
+				localStorage.setItem('token', response.token);
+				Swal.fire({
+					icon: 'success',
+					title: response.message,
+					showConfirmButton: false,
+					timer: 1500,
+				});
 				navigate(from, { replace: true });
-			}, 2000);
+			} else {
+				Swal.fire({
+					icon: 'error',
+					title: response.message,
+					showConfirmButton: false,
+					timer: 2000,
+				});
+			}
 		},
 	});
 
@@ -83,11 +97,9 @@ const LoginForm = ({ setAuth }) => {
 						<TextField
 							fullWidth
 							autoComplete="username"
-							type="email"
-							label="Email"
-							{...getFieldProps('email')}
-							error={Boolean(touched.email && errors.email)}
-							helperText={touched.email && errors.email}
+							type="text"
+							label="Login"
+							{...getFieldProps('login')}
 						/>
 
 						<TextField
@@ -95,7 +107,7 @@ const LoginForm = ({ setAuth }) => {
 							autoComplete="current-password"
 							type={showPassword ? 'text' : 'password'}
 							label="Senha"
-							{...getFieldProps('password')}
+							{...getFieldProps('senha')}
 							error={Boolean(touched.password && errors.password)}
 							helperText={touched.password && errors.password}
 							InputProps={{
@@ -123,22 +135,6 @@ const LoginForm = ({ setAuth }) => {
 							justifyContent="space-between"
 							sx={{ my: 2 }}
 						>
-							<FormControlLabel
-								control={
-									<Checkbox
-										sx={{
-											color: '#5965E0',
-											'&.Mui-checked': {
-												color: '#5965E0',
-											},
-										}}
-										{...getFieldProps('remember')}
-										checked={values.remember}
-									/>
-								}
-								label="Lembre de mim"
-							/>
-
 							<Link
 								sx={{
 									color: '#5965E0',
