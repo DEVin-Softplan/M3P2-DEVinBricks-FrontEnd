@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { loginUser } from '../../services/AuthService';
 import Swal from 'sweetalert2';
-import {
-	Box,
-	IconButton,
-	InputAdornment,
-	Link,
-	Stack,
-	TextField,
-	FormControlLabel,
-} from '@mui/material';
+import { Box, IconButton, InputAdornment, Stack, TextField } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
@@ -41,7 +33,7 @@ const LoginForm = () => {
 		if (auth) {
 			navigate('/');
 		}
-	}, [auth]);
+	});
 
 	const LoginSchema = Yup.object().shape({
 		login: Yup.string().required('Login é obrigatório'),
