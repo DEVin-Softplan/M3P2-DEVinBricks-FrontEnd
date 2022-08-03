@@ -1,33 +1,30 @@
-
 export const itemsMenus = [
   {
-    "Descricao": "Nova Venda", 
-    "Rota": "/Vendas"
+    Descricao: 'Nova Venda',
+    Rota: '/VendaProduto',
   },
   {
-    "Descricao": "Vendas", 
-    "Rota": "/MinhasEntregas"
+    Descricao: 'Vendas',
+    Rota: '/MinhasEntregas',
   },
   {
-    "Descricao": "Produtos", 
-    "Rota": "/Produtos"
-  },    
-  {
-    "Descricao": "Usuários", 
-    "Rota": "/Usuarios"
+    Descricao: 'Produtos',
+    Rota: '/Produtos',
   },
   {
-    "Descricao": "Frete", 
-    "Rota": "/Frete"
+    Descricao: 'Usuários',
+    Rota: '/Usuarios',
   },
   {
-    "Descricao": "Compradores", 
-    "Rota": "/Compradores"
+    Descricao: 'Frete',
+    Rota: '/Frete',
   },
   {
-    "Descricao": "Sair", 
-    "Rota": "/Login"
+    Descricao: 'Compradores',
+    Rota: '/Compradores',
+  },
+  {
+    Descricao: 'Sair',
+    Rota: '/Login',
   },
 ];
-
-
