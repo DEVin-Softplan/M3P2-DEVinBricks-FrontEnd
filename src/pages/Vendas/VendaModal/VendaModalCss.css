@@ -1,5 +1,5 @@
 .modal-overlay {
-    background-color: rgb(219, 214, 214);
+    background-color: rgba(105, 100, 100, 0.2);
     position: fixed;
     top: 0;
     bottom: 0;
@@ -9,26 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
 
-table {
-    border: 1px solid gray;
-}
-
-
-th {
-    margin-bottom: 20px;
-}
-
-
-table, th, td {
-    /* border: 1px solid black; */
-    border-collapse: collapse;
-    text-align: left;
-    
-}
-table {
-    width: 480px;
 }
 
 .modal-content {
@@ -36,10 +17,10 @@ table {
     max-width: 500px;
     background-color: white;
     padding: 10px;
+    border-radius: 20px;
 }
 
 #footer {
-    /* display: inline-block; */
     justify-content: space-between;
     width: 480px;
     padding: 10px;
@@ -52,7 +33,7 @@ table {
 
 #divB {
     text-align: left;
-    width: 120px;
+    width: 140px;
     float: right;
     
 }    
@@ -62,15 +43,10 @@ p {
     padding-top: 0px;
 }
 
-
-
 .closeButton {
     color: var(--blue);
     float: right;
-
 }
-
-
 
 h2 {
     color: var(--blue);

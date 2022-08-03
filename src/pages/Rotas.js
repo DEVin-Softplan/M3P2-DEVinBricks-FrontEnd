@@ -8,6 +8,8 @@ import Home from "./Home/Home";
 import Vendas from "./Vendas/Vendas";
 import Usuarios from "./Usuarios/Usuarios";
 import UsuariosForm from "./Usuarios/UsuariosForm/UsuariosForm";
+import Usuarios from "./Usuarios";
+import UsuariosForm from "./Usuarios/UsuarioForm/UsuariosForm";
 import Comprador from "./Compradores/Comprador";
 import CompradorForm from "./Compradores/Comprador";
 import FreteForm from "./Frete/FreteForm/FreteForm";

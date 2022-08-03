@@ -16,8 +16,8 @@ import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md"
 
 const venda = {
     comprador: {
-        nome: "Maria",
-        cpf: "021.234.345.767-09",
+        nome: "Maria Santos Silva",
+        cpf: "021.234.767-09",
         email: "manu@gmail.com",
         telefone: "(48) 989766908"
     },

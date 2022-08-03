@@ -23,4 +23,8 @@
     align-content: center;
   
     /* background-color: blueviolet; */
-  };
+  
+  .table{
+    margin: 1rem;
+  }
+  
