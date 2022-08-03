@@ -1,7 +1,7 @@
 export const itemsMenus = [
 	{
 		Descricao: 'Nova Venda',
-		Rota: '/Vendas',
+		Rota: '/VendaProduto',
 	},
 	{
 		Descricao: 'Vendas',

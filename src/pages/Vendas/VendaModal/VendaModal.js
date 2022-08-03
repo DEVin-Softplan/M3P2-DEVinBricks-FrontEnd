@@ -3,7 +3,6 @@ import Modal from "react-modal";
 import "./VendaTabela";
 import FreteTabela from "./VendaTabela";
 
-
 Modal.setAppElement("#root");
 
 function VendaModal({ comprador, dadosEntrega, carrinho }) {
