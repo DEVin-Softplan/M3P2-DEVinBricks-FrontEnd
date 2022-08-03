@@ -1,0 +1,63 @@
+.Main{
+    display: flex;
+}
+
+.Container{
+    border: 1px solid rgb(164, 164, 164);
+    border-radius: 3px;
+    margin: auto 40vh;
+    width: 45vw;
+    min-height: 20vw;
+}
+
+.NovoUsuario{
+    display: flex;
+    margin: 1vh 2vw;
+    text-align: center;
+    justify-content: space-between;    
+}
+
+.NovoUsuario h1 {
+    color: var(--blue-dark);
+}
+
+.Button{
+    background: var(--blue-dark);
+    color:var(--white);
+    transition: ease 0.5s;
+    padding: 0.5vh 0.5vw;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.Button:hover{
+    background-color: rgb(81, 35, 187);
+}
+
+.Input{
+    width: 35vw;
+    margin: 1vw 5vw;
+}
+
+.tabela{
+    width: 40vw;
+    margin: auto;
+}
+.nivel{
+    width: 5vw;
+    text-align: center;
+}
+.nome{
+    width: 10vw;
+    text-align: center;
+}
+
+.email{
+    width: 20vw;
+    text-align: center;
+}
+
+.acoes{
+    width: 5vw;
+    text-align: center;
+}
