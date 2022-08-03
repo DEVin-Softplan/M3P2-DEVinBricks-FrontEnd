@@ -26,6 +26,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.7",
+    "sweetalert2": "^11.4.24",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
