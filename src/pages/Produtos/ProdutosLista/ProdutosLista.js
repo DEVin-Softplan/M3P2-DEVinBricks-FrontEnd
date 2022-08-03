@@ -41,6 +41,14 @@ const ProdutosLista = (props) => {
     });
   };
 
+  const handlePreviousPage = () =>{
+
+  }
+
+  const handleNextPage = () =>{
+
+  }
+
   const filtrarListaPorPagina = (lista, pagina) =>{
     const qtd_Itens = 10;
     return lista.slice((pagina * qtd_Itens) - qtd_Itens, pagina * qtd_Itens);
@@ -63,7 +71,12 @@ const ProdutosLista = (props) => {
         className={styles.table} sx={{ maxWidth: 700 }}>
         <Table sx={{ minWidth: 240 }}  aria-label="caption table">
           <caption>
-            <PageInfo />
+            <PageInfo
+              pagina={page}
+              PaginaAnterior={handlePreviousPage}
+              ProximaPagina={handleNextPage}
+              
+            />
           </caption>
           <TableHead>
             <TableRow>
