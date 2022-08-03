@@ -12,28 +12,10 @@ import styles from './ProdutosLista.module.css';
 import Header from '../../../components/Header/Header';
 import Pesquisa from '../../../components/Pesquisa';
 import Button from '../../../components/Button';
-import { TextField } from '@mui/material';
-import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md";
 import PageInfo from '../../../components/PageInfo';
 
-
 import { getAllProdutos } from './../../../test/mock/ProdutosMock';
-
-function createData(
-  status,
-  nomeProduto,
-  preco,
-  acao,
-) {
-  return { status, nomeProduto, preco, acao };
-}
-
-const rows = [
-  createData('ATIVO', 'CIMENTO', "R$ 323,00", <Link to='/EditarProduto/100'><RiPencilFill size={30}/></Link>),
-  createData('ATIVO', 'CIMENTO', "R$ 234,00", <Link to='/EditarProduto/200'><RiPencilFill size={30}/></Link>),
-  createData('ATIVO', 'CIMENTO', "R$ 556,00", <Link to='/EditarProduto/300'><RiPencilFill size={30}/></Link>),
-];
-
+import { formatarMoeda } from './../../../utils/FormatarMoeda';
 
 const ProdutosLista = (props) => {
 
@@ -57,12 +39,33 @@ const ProdutosLista = (props) => {
       return new RegExp(termo, "ig").test(listaProdutos.Nome);
     });
   };
-
+  
   const filtrarListaPorPagina = (lista, pagina) =>{
     const qtd_Itens = 10;
     return lista.slice((pagina * qtd_Itens) - qtd_Itens, pagina * qtd_Itens);
-  }
+  };
+
+  useEffect(()=>{
+    setProdutosFiltrado(filtrarListaPorTermoBusca(listaProdutos.current, termoBusca));    
+  }, [termoBusca]);
+
+  useEffect(()=>{
+    setProdutosFiltrado(filtrarListaPorPagina(listaProdutos.current, pagina));
+  },[pagina]);
   
+  const handlePreviousPage = () =>{
+    setPagina((currentPage)=> (currentPage > 1 ? currentPage -1 :1));
+  };
+
+  const handleNextPage = () =>{
+    setPagina((currentPage)=> (currentPage >= maxQtdPagina ? maxQtdPagina : currentPage + 1));
+  };
+
+  const pageInfo =  {
+    currentPage: pagina,
+    totalPages: maxQtdPagina
+  };
+
   return(    
     <section className={styles.section}>  
       <header className={styles.header}>
@@ -72,7 +75,12 @@ const ProdutosLista = (props) => {
             <Button>Novo Produto</Button>
           </Link>         
         </div>                
-        <Pesquisa placeholder={"Nome do produto..."}/>
+        <Pesquisa 
+          placeholder={"Nome do produto..."}
+          onChange={(event)=>{
+            setTermoBusca(event.target.value);
+          }}
+        />
       </header>
 
       <TableContainer 
@@ -80,7 +88,11 @@ const ProdutosLista = (props) => {
         className={styles.table} sx={{ maxWidth: 700 }}>
         <Table sx={{ minWidth: 240 }}  aria-label="caption table">
           <caption>
-            <PageInfo />
+            <PageInfo
+              pageInfo={pageInfo}
+              PaginaAnterior={handlePreviousPage}
+              ProximaPagina={handleNextPage}              
+            />
           </caption>
           <TableHead>
             <TableRow>
@@ -91,12 +103,18 @@ const ProdutosLista = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {produtosFiltrado.map((item, index) => (
+            {produtosFiltrado.map((item) => (
               <TableRow key={item.Id}>
-                <TableCell component="th" scope="row">{(item.Ativo)? "Ativo" : "Descontinuado"}</TableCell>
+                <TableCell component="th" scope="row">
+                  {(item.Ativo)? "Ativo" : "Descontinuado"}
+                </TableCell>
                 <TableCell align="center">{item.Nome}</TableCell>
-                <TableCell align="center">{item.Valor}</TableCell>
-                <TableCell align="right"><Link to={`EditarProduto/${item.Id}`}><RiPencilFill size={30}/></Link></TableCell>                
+                <TableCell align="center">{formatarMoeda(item.Valor)}</TableCell>
+                <TableCell align="right">
+                  <Link to={`EditarProduto/${item.Id}`}>
+                    <RiPencilFill size={30}/>
+                  </Link>
+                </TableCell>                
               </TableRow>
             ))}
           </TableBody>
