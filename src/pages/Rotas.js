@@ -8,7 +8,7 @@ import VendaProduto from "./NovaVenda/VendaProduto/VendaProduto";
 import VendaResumo from "./NovaVenda/VendaResumo";
 import Vendas from "./Vendas/Vendas";
 import Comprador from "./Compradores/Comprador";
-import CompradorForm from "./Compradores/Comprador";
+import CompradorForm from "./Compradores/CompradorForm";
 
 const Rotas = () => {
   return (
@@ -25,6 +25,7 @@ const Rotas = () => {
 				<Route path="/MinhasEntregas" exact element={<Vendas />} />
         <Route path="/Compradores" exact element={<Comprador />} />
         <Route path="/NovoComprador" exact element={<CompradorForm />} />
+        <Route path="/EditarComprador/:id" exact element ={<CompradorForm />} />
       </Routes>
     </BrowserRouter>
   );

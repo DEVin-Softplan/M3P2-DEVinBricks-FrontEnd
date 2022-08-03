@@ -41,8 +41,7 @@ const Comprador = () => {
         <TableContainer
           component={Paper}
           className={styles.table} sx={{ maxWidth: 800 }}>
-          <Table sx={{ minWidth: 250 }} aria-label="caption table">
-            <caption></caption>
+          <Table sx={{ minWidth: 240 }} aria-label="caption table">
             <TableHead>
               <TableRow>
                 <TableCell align="right">Nome</TableCell>
@@ -57,7 +56,8 @@ const Comprador = () => {
                   <TableCell component="th" scope="row">{row.nome}</TableCell>
                   <TableCell align="right">{row.telefone}</TableCell>
                   <TableCell align="right">{row.cpf}</TableCell>
-                  <TableCell align="right"><RiPencilFill size={30} /><FaCartArrowDown size={30} /></TableCell>
+                  <TableCell align="right"><Link to={`EditarComprador/${row.id}`}><RiPencilFill size={30} /></Link><FaCartArrowDown size={30} />
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
