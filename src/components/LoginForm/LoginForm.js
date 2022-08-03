@@ -4,7 +4,15 @@ import { Form, FormikProvider, useFormik } from 'formik';
 import * as Yup from 'yup';
 import { loginUser } from '../../services/AuthService';
 import Swal from 'sweetalert2';
-import { Box, IconButton, InputAdornment, Link, Stack, TextField } from '@mui/material';
+import {
+	Box,
+	IconButton,
+	InputAdornment,
+	Link,
+	Stack,
+	TextField,
+	FormControlLabel,
+} from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Icon } from '@iconify/react';
 import { motion } from 'framer-motion';
@@ -36,7 +44,7 @@ const LoginForm = () => {
 	}, [auth]);
 
 	const LoginSchema = Yup.object().shape({
-		login: Yup.string().required('login é obrigatório'),
+		login: Yup.string().required('Login é obrigatório'),
 		senha: Yup.string().required('Senha é obrigatória'),
 	});
 
@@ -100,6 +108,8 @@ const LoginForm = () => {
 							type="text"
 							label="Login"
 							{...getFieldProps('login')}
+							error={Boolean(touched.login && errors.login)}
+							helperText={touched.login && errors.login}
 						/>
 
 						<TextField
@@ -108,8 +118,8 @@ const LoginForm = () => {
 							type={showPassword ? 'text' : 'password'}
 							label="Senha"
 							{...getFieldProps('senha')}
-							error={Boolean(touched.password && errors.password)}
-							helperText={touched.password && errors.password}
+							error={Boolean(touched.senha && errors.senha)}
+							helperText={touched.senha && errors.senha}
 							InputProps={{
 								endAdornment: (
 									<InputAdornment position="end">
