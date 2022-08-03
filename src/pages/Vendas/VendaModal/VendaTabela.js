@@ -9,8 +9,6 @@ const columns = [
     { field: 'subTotal', headerName: 'SubTotal', width: 90, },
 ];
 
-
-
 export default function VendaTabela({ carrinho }) {
     return (
         <div style={{ height: 220, width: 480 }}>
