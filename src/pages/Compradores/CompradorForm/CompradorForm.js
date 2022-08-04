@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from '../../../components/Button';
 import Header from '../../../components/Header/Header';
@@ -9,6 +9,7 @@ import Menus from '../../../components/Menus';
 
 const CompradorForm = () => {
   const params = useParams();
+
   const [comprador, setcomprador] = useState({
     id: '',
     nome: '',
@@ -18,6 +19,17 @@ const CompradorForm = () => {
     dataNascimento: '',
     usuarioInclusaoId: 1
   })
+
+  useEffect(() => {
+    cliente.post('/api/Comprador?nome=&cpf=')
+      .then(res => {
+        setcomprador(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+        setcomprador([])
+      })
+  }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target

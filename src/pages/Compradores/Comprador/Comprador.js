@@ -31,7 +31,7 @@ const Comprador = () => {
         <header className={styles.header}>
           <div className={styles.firstDivHeader}>
             <Header title="Compradores" />
-            <Link to={`/NovoComprador/Novo Comprador/Criar/`}>
+            <Link to={`/NovoComprador/Novo Comprador/Criar/id`}>
               <Button>Novo Comprador</Button>
             </Link>
           </div>
