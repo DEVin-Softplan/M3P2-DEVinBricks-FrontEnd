@@ -79,7 +79,7 @@ const UsuariosForm = () => {
             />
           </FormGroup>
           <div>
-            <Link to="/">
+            <Link to="/Usuarios">
               <Button variant="contained">Voltar</Button>
             </Link>
             <Button variant="contained" type="submit">Cadastrar</Button>
