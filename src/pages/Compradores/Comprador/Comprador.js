@@ -31,7 +31,7 @@ const Comprador = () => {
         <header className={styles.header}>
           <div className={styles.firstDivHeader}>
             <Header title="Compradores" />
-            <Link to={`/NovoComprador`}>
+            <Link to={`/NovoComprador/Novo Comprador/Criar/`}>
               <Button>Novo Comprador</Button>
             </Link>
           </div>
@@ -57,7 +57,12 @@ const Comprador = () => {
                   <TableCell component="th" scope="row">{row.nome}</TableCell>
                   <TableCell align="right">{row.telefone}</TableCell>
                   <TableCell align="right">{row.cpf}</TableCell>
-                  <TableCell align="right"><RiPencilFill size={30} /><FaCartArrowDown size={30} /></TableCell>
+                  <TableCell align="right">
+                    <Link to={`/NovoComprador/Editar Comprador/Salvar/${row.id}`}>
+                      <RiPencilFill size={30} />
+                    </Link>
+                    <FaCartArrowDown size={30} />
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

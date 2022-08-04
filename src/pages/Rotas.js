@@ -9,7 +9,7 @@ import Vendas from "./Vendas/Vendas";
 import Usuarios from "./Usuarios";
 import UsuariosForm from "./Usuarios/UsuarioForm/UsuariosForm";
 import Comprador from "./Compradores/Comprador";
-import CompradorForm from "./Compradores/Comprador";
+import CompradorForm from "./Compradores/CompradorForm";
 import FreteForm from "./Frete/FreteForm/FreteForm";
 
 const Rotas = () => {
@@ -30,7 +30,7 @@ const Rotas = () => {
 				<Route path="/Frete/NovaRegra" exact element={<FreteForm />} />
 				<Route path="/MinhasEntregas" exact element={<Vendas />} />
 				<Route path="/Compradores" exact element={<Comprador />} />
-				<Route path="/NovoComprador" exact element={<CompradorForm />} />
+				<Route path="/NovoComprador/:title/:labelButton/:id" exact element={<CompradorForm />} />
 			</Routes>
 		</BrowserRouter>
 	);

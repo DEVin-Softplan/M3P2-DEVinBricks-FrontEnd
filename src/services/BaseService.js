@@ -3,7 +3,7 @@ import env from "react-dotenv";
 
 const getURLBackend = () => {
 	const { URL_BACKEND } = env || "";
-	return URL_BACKEND;
+	return "https://localhost:7171";
 };
 
 export const cliente = axios.create({
