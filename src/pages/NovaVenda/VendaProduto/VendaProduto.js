@@ -11,9 +11,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { VendaContext } from '../../../contexts/VendaContext';
 import { getAllProducts } from '../../../services/ProdutosService';
+import { useAuth } from '../../../contexts/Auth/useAuth';
 
 const VendaProduto = () => {
   const navigate = useNavigate();
+  const { token } = useAuth();
 
   const { adicionarProdutos } = useContext(VendaContext);
 
@@ -52,7 +54,7 @@ const VendaProduto = () => {
 
   useEffect(() => {
     (async () => {
-      const listaProdutosAPI = await getAllProducts();
+      const listaProdutosAPI = await getAllProducts(token);
       console.log(listaProdutosAPI);
       setListaProdutos(listaProdutosAPI);
     })();
