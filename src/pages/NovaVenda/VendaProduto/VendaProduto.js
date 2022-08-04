@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { VendaContext } from '../../../contexts/VendaContext';
 import { getAllProducts } from '../../../services/ProdutosService';
 import { useAuth } from '../../../contexts/Auth/useAuth';
+import Swal from 'sweetalert2';
 
 const VendaProduto = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const VendaProduto = () => {
 
   const [pesquisaProduto, setPesquisaProduto] = useState('');
   const [listaProdutos, setListaProdutos] = useState([]);
+  const [produtosPesquisados, setProdutosPesquisados] = useState([]);
   const [carrinho, setCarrinho] = useState([]);
   const [desabilitarBotao, setDesabilitarBotao] = useState(true);
 
@@ -33,7 +35,15 @@ const VendaProduto = () => {
       produtos.nome.includes(pesquisaProduto),
     );
 
-    setListaProdutos(produtosFiltrados);
+    setProdutosPesquisados(produtosFiltrados);
+
+    if (produtosFiltrados.length === 0) {
+      Swal.fire(
+        'Nenhum produto encontrado!',
+        'Realize uma nova busca.',
+        'error',
+      );
+    }
   };
 
   const adicionarProduto = (produto) => {
@@ -55,7 +65,6 @@ const VendaProduto = () => {
   useEffect(() => {
     (async () => {
       const listaProdutosAPI = await getAllProducts(token);
-      console.log(listaProdutosAPI);
       setListaProdutos(listaProdutosAPI);
     })();
   }, []);
@@ -78,10 +87,10 @@ const VendaProduto = () => {
           value={pesquisaProduto}
         />
 
-        {listaProdutos.length === 0 ? (
+        {produtosPesquisados.length === 0 ? (
           <AreaPesquisa />
         ) : (
-          listaProdutos.map((produto) => (
+          produtosPesquisados.map((produto) => (
             <CardProduto
               key={produto.id}
               produto={produto}
