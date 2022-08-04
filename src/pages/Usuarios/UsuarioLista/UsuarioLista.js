@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styles from './UsuarioLista.module.css';
-import EditIcon from '@mui/icons-material/Edit';
-import { purple } from '@mui/material/colors';
 
 
 
@@ -79,8 +77,8 @@ if(carregando){
             <td className={styles.nivel}> {usuario.admin === false ? 'Comum' : 'Admin'} </td>
             <td className={styles.nome}>{usuario.nome} </td> 
             <td className={styles.email}>{usuario.email}</td> 
-            <td className={styles.usuario}>{usuario.login}</td>
-            <td className={styles.acoes}><EditIcon/></td>
+            <td className={styles.login}>{usuario.login}</td>
+            <td className={styles.acoes}>icons</td>
           </tr>       
         </table>
         )} 

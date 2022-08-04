@@ -10,11 +10,7 @@ import Usuarios from "./Usuarios";
 import UsuariosForm from "./Usuarios/UsuarioForm/UsuariosForm";
 import Comprador from "./Compradores/Comprador";
 import CompradorForm from "./Compradores/Comprador";
-<<<<<<< HEAD
-import Usuarios from "./Usuarios/Usuarios";
-=======
 import FreteForm from "./Frete/FreteForm/FreteForm";
->>>>>>> fa8f70a2ab586d6ead60d6a9528b17a3fd42a4c9
 
 const Rotas = () => {
 	return (
@@ -28,14 +24,6 @@ const Rotas = () => {
 				<Route path="/VendaProduto" exact element={<VendaProduto />} />
 				<Route path="/VendaResumo" exact element={<VendaResumo />} />
 				<Route path="/MinhasEntregas" exact element={<Vendas />} />
-<<<<<<< HEAD
-        <Route path="/Compradores" exact element={<Comprador />} />
-        <Route path="/NovoComprador" exact element={<CompradorForm />} />
-        <Route path="/Usuarios" exact element={<Usuarios />} />
-      </Routes>
-    </BrowserRouter>
-  );
-=======
 				<Route path="/Usuarios" exact element={<Usuarios />} />
 				<Route path="/UsuariosForm" exact element={<UsuariosForm />} />
 				<Route path="/NovoUsuario" exact element={<UsuariosForm />} />
@@ -46,7 +34,6 @@ const Rotas = () => {
 			</Routes>
 		</BrowserRouter>
 	);
->>>>>>> fa8f70a2ab586d6ead60d6a9528b17a3fd42a4c9
 };
 
 export default Rotas;

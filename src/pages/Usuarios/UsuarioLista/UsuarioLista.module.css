@@ -54,12 +54,12 @@
 }
 
 .email{
-    width: 16vw;
+    width: 13vw;
     text-align: center;
 }
 
 .usuario{
-    width: 5vw;
+    width: 7vw;
     text-align: center;
 }
 .acoes{
@@ -79,13 +79,13 @@
 }
 
 .emailTitulo{
-    width: 16vw;
+    width: 13vw;
     text-align: center;
     background-color: rgb(159, 145, 231);
 }
 
 .usuarioTitulo{    
-    width: 5vw;
+    width: 7vw;
     text-align: center;
     background-color: rgb(159, 145, 231);
 }

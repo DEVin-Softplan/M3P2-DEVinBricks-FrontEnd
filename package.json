@@ -5,12 +5,8 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
-<<<<<<< HEAD
-    "@mui/icons-material": "^5.8.4",
-=======
     "@iconify/react": "^3.2.2",
     "@mui/lab": "^5.0.0-alpha.92",
->>>>>>> fa8f70a2ab586d6ead60d6a9528b17a3fd42a4c9
     "@mui/material": "^5.9.2",
     "@mui/x-data-grid": "^5.15.0",
     "@mui/x-date-pickers": "^5.0.0-beta.2",
