@@ -41,8 +41,7 @@ const Comprador = () => {
         <TableContainer
           component={Paper}
           className={styles.table} sx={{ maxWidth: 800 }}>
-          <Table sx={{ minWidth: 250 }} aria-label="caption table">
-            <caption></caption>
+          <Table sx={{ minWidth: 240 }} aria-label="caption table">
             <TableHead>
               <TableRow>
                 <TableCell align="right">Nome</TableCell>
