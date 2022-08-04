@@ -12,7 +12,7 @@ import { BsFillEyeFill } from "react-icons/bs"
 import { FaWindowClose } from "react-icons/fa"
 import VendaModal from '../VendaModal/VendaModal';
 import { AiFillDelete } from "react-icons/ai"
-import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md"
+import PageInfo from '../../../components/PageInfo';
 
 const venda = {
     comprador: {
@@ -81,6 +81,9 @@ const dadosVenda = [
 ]
 
 export default function VendasLista() {
+
+    const maxQtdPagina = 3;
+
     const [modalisopen, setIsOpen] = useState(false);
     function openModal() {
         setIsOpen(true);
@@ -89,20 +92,32 @@ export default function VendasLista() {
         setIsOpen(false);
     }
 
-    const [page, setPage] = useState(1);
-    function nextPage() {
-        setPage(page+1);
-    }
-    function prevPage() {
-        if(page !== 1) setPage(page-1);
-    }
+    const [pagina, setPagina] = useState(1);
+    const handlePreviousPage = () =>{
+        setPagina((currentPage)=> (currentPage > 1 ? currentPage -1 : 1));
+      };
+    
+    const handleNextPage = () =>{
+    setPagina((currentPage)=> (currentPage >= maxQtdPagina ? maxQtdPagina : currentPage + 1));
+    };
+
+    const pageInfo =  {
+    currentPage: pagina,
+    totalPages: maxQtdPagina
+    };
 
     return (
         <TableContainer 
         component={Paper} 
         className={styles.table}>
         <Table sx={{ minWidth: 250 }}  aria-label="caption table">
-          <caption></caption>
+        <caption>
+            <PageInfo
+              pageInfo={pageInfo}
+              PaginaAnterior={handlePreviousPage}
+              ProximaPagina={handleNextPage}              
+            />
+          </caption>
           <TableHead>
             <TableRow>
               <TableCell align="left">CPF</TableCell>
@@ -137,7 +152,6 @@ export default function VendasLista() {
             ))}
           </TableBody>
         </Table>
-        <span className={styles.pages}><MdOutlineArrowBackIos onClick={prevPage}/>   <label className={styles.pageNumber}>{page}</label>   <MdOutlineArrowForwardIos onClick={nextPage}/></span>
       </TableContainer>
     );
 }

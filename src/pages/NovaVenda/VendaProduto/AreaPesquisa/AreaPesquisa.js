@@ -5,7 +5,7 @@ import { TbListSearch } from 'react-icons/tb';
 const AreaPesquisa = () => {
   return (
     <div className={styles.container}>
-      <TbListSearch className={styles.icon} />
+      <TbListSearch className={styles.icon} data-testid="icone" />
       <p>Pesquise por um nome ou código de produto</p>
     </div>
   );
