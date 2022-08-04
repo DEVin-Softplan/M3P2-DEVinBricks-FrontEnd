@@ -35,8 +35,6 @@ const UsuariosForm = () => {
       <Menus />
       <FormikProvider value={formik}>
         <form className={style.container} noValidate onSubmit={handleSubmit}>
-          {" "}
-          >
           <Header title="Novo usuário" />
           <TextField
             fullWidth
