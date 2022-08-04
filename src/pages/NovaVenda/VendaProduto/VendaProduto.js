@@ -10,31 +10,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { VendaContext } from '../../../contexts/VendaContext';
-
-// Simula resultado de uma busca qualquer na API
-const mockProdutosApi = [
-  {
-    id: 1,
-    nome: 'Cimento',
-    valor: 30,
-    quantidade: 0,
-  },
-  {
-    id: 2,
-    nome: 'Tijolo',
-    valor: 2,
-    quantidade: 0,
-  },
-  {
-    id: 3,
-    nome: 'Telha',
-    valor: 10,
-    quantidade: 0,
-  },
-];
+import { getAllProducts } from '../../../services/ProdutosService';
 
 const VendaProduto = () => {
   const navigate = useNavigate();
+
   const { adicionarProdutos } = useContext(VendaContext);
 
   const [pesquisaProduto, setPesquisaProduto] = useState('');
@@ -46,7 +26,12 @@ const VendaProduto = () => {
 
   const pesquisarProdutos = (event) => {
     event.preventDefault();
-    setListaProdutos(mockProdutosApi);
+
+    const produtosFiltrados = listaProdutos.filter((produtos) =>
+      produtos.nome.includes(pesquisaProduto),
+    );
+
+    setListaProdutos(produtosFiltrados);
   };
 
   const adicionarProduto = (produto) => {
@@ -65,6 +50,14 @@ const VendaProduto = () => {
       : setDesabilitarBotao(true);
   }, [carrinho]);
 
+  useEffect(() => {
+    (async () => {
+      const listaProdutosAPI = await getAllProducts();
+      console.log(listaProdutosAPI);
+      setListaProdutos(listaProdutosAPI);
+    })();
+  }, []);
+
   return (
     <>
       <Menus />
@@ -80,6 +73,7 @@ const VendaProduto = () => {
           placeholder="Pesquise um produto"
           onChange={(value) => setPesquisaProduto(value)}
           onSubmit={pesquisarProdutos}
+          value={pesquisaProduto}
         />
 
         {listaProdutos.length === 0 ? (
