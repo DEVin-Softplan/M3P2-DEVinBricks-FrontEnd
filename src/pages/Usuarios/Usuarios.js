@@ -4,14 +4,14 @@ import styles from './UsuarioLista.module.css';
 import Menus from '../../components/Menus';
 
 const Usuarios = () => {
-  const handerProductPage = () => {
+  const handerUsuariosPage = () => {
     return <UsuarioLista />;
   }
 
   return (
     <main className={styles.Main}>
       <Menus />      
-      {handerProductPage()}
+      {handerUsuariosPage()}
     </main>
   );
 };

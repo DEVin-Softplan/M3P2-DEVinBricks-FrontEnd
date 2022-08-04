@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './UsuarioLista.module.css';
 import EditIcon from '@mui/icons-material/Edit';
+import { purple } from '@mui/material/colors';
 
 
 
@@ -15,7 +16,7 @@ useEffect(() => {
   fetch(`https://localhost:7171/api/Usuario?nome=sem%20nome&login=sem%20login&tamanho=0&pagina=1`, { 
     method: 'GET', 
     headers: new Headers({
-    'Authorization': 'Bearer '+('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwibmFtZSI6IkFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpc19hZG1pbiI6IlRydWUiLCJuYmYiOjE2NTk1MzYzNTMsImV4cCI6MTY1OTU0MzU1MywiaWF0IjoxNjU5NTM2MzUzfQ.sSamPC1_9DRche_YqAOxaACYcg1ZzgG7GR3igcp-zms'), 
+    'Authorization': 'Bearer '+('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwibmFtZSI6IkFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpc19hZG1pbiI6IlRydWUiLCJuYmYiOjE2NTk1NDczMjEsImV4cCI6MTY1OTU1NDUyMSwiaWF0IjoxNjU5NTQ3MzIxfQ.QdVZ--R_9PgJcdquNua-vp4lUUXLeBdpGVz2_jM-r0Q'), 
     'Content-Type': 'application/json'
     }), 
   }).then(response => {
@@ -31,7 +32,7 @@ useEffect(() => {
 useEffect(() => {
   if(termoBusca){
    const listaFiltrada = usuarios.filter((usuario) =>
-   usuario.login.toUpperCase().includes(termoBusca.toUpperCase()))
+   usuario.login.toUpperCase().toUpperCase().includes(termoBusca.toUpperCase()) || usuario.nome.toUpperCase().toUpperCase().includes(termoBusca.toUpperCase()) )
     setUsuariosFiltrado(listaFiltrada)      
    }else{
     setUsuariosFiltrado(usuarios)
@@ -52,7 +53,7 @@ if(carregando){
     </div>
     <div>
       <input 
-      placeholder='Pesquise pelo nome' 
+      placeholder='  Pesquise pelo nome' 
       className={styles.Input}
         onChange={(event) => {
           setTermoBusca(event.target.value)
@@ -63,10 +64,11 @@ if(carregando){
     <div>       
     <table border={1} className={styles.tabela}>
           <tr>
-            <th className={styles.nivel}>Nivel</th> 
-            <th className={styles.nome}>Nome</th>
-            <th className={styles.email}>Email</th>
-            <th className={styles.acoes} >Ações</th>
+            <th className={styles.nivelTitulo}>Nivel</th> 
+            <th className={styles.nomeTitulo}>Nome</th>
+            <th className={styles.emailTitulo}>Email</th>
+            <th className={styles.usuarioTitulo} >Usuário</th>
+            <th className={styles.acoesTitulo} >Ações</th>
           </tr>  
     </table> 
         {usuariosFiltrados.length === 0 
@@ -77,7 +79,8 @@ if(carregando){
             <td className={styles.nivel}> {usuario.admin === false ? 'Comum' : 'Admin'} </td>
             <td className={styles.nome}>{usuario.nome} </td> 
             <td className={styles.email}>{usuario.email}</td> 
-            <td className={styles.acoes}><EditIcon>Edit</EditIcon></td>
+            <td className={styles.usuario}>{usuario.login}</td>
+            <td className={styles.acoes}><EditIcon/></td>
           </tr>       
         </table>
         )} 
