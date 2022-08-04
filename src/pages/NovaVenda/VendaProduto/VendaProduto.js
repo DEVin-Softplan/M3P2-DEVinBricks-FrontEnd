@@ -14,6 +14,7 @@ import { getAllProducts } from '../../../services/ProdutosService';
 
 const VendaProduto = () => {
   const navigate = useNavigate();
+
   const { adicionarProdutos } = useContext(VendaContext);
 
   const [pesquisaProduto, setPesquisaProduto] = useState('');
@@ -23,20 +24,15 @@ const VendaProduto = () => {
 
   const notificar = (nome) => toast(`${nome} adicionado ao carrinho`);
 
-  useEffect(() => {
-    (async () => {
-      const listaProdutosAPI = await getAllProducts();
-      console.log(listaProdutosAPI);
-      setListaProdutos(listaProdutosAPI);
-    })();
-  }, []);
+  const pesquisarProdutos = (event) => {
+    event.preventDefault();
 
-  const produtosFiltrados =
-    pesquisaProduto > 0
-      ? listaProdutos.filter((produtos) =>
-          produtos.nome.includes(pesquisaProduto),
-        )
-      : [];
+    const produtosFiltrados = listaProdutos.filter((produtos) =>
+      produtos.nome.includes(pesquisaProduto),
+    );
+
+    setListaProdutos(produtosFiltrados);
+  };
 
   const adicionarProduto = (produto) => {
     setCarrinho([...carrinho, produto]);
@@ -54,6 +50,14 @@ const VendaProduto = () => {
       : setDesabilitarBotao(true);
   }, [carrinho]);
 
+  useEffect(() => {
+    (async () => {
+      const listaProdutosAPI = await getAllProducts();
+      console.log(listaProdutosAPI);
+      setListaProdutos(listaProdutosAPI);
+    })();
+  }, []);
+
   return (
     <>
       <Menus />
@@ -67,25 +71,22 @@ const VendaProduto = () => {
 
         <Pesquisa
           placeholder="Pesquise um produto"
-          onChange={(event) => setPesquisaProduto(event.target.value)}
+          onChange={(value) => setPesquisaProduto(value)}
+          onSubmit={pesquisarProdutos}
           value={pesquisaProduto}
         />
 
-        {pesquisaProduto.length > 0
-          ? produtosFiltrados.map((produto) => (
-              <CardProduto
-                key={produto.id}
-                produto={produto}
-                adicionarProduto={adicionarProduto}
-              />
-            ))
-          : listaProdutos.map((produto) => (
-              <CardProduto
-                key={produto.id}
-                produto={produto}
-                adicionarProduto={adicionarProduto}
-              />
-            ))}
+        {listaProdutos.length === 0 ? (
+          <AreaPesquisa />
+        ) : (
+          listaProdutos.map((produto) => (
+            <CardProduto
+              key={produto.id}
+              produto={produto}
+              adicionarProduto={adicionarProduto}
+            />
+          ))
+        )}
 
         <div className={styles.footer}>
           <Button disabled={desabilitarBotao} onClick={proximaEtapa}>

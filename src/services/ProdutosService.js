@@ -4,7 +4,7 @@ export const getAllProducts = async () => {
       method: 'GET',
       headers: {
         Authorization:
-          'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwibmFtZSI6IkFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpc19hZG1pbiI6IlRydWUiLCJuYmYiOjE2NTk1NzM2MzUsImV4cCI6MTY1OTU4MDgzNSwiaWF0IjoxNjU5NTczNjM1fQ.TJz2sNhMdNr7Uo-FrDaiNhpoQYewNwg_Ak9ucw-WH54',
+          'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwibmFtZSI6IkFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpc19hZG1pbiI6IlRydWUiLCJuYmYiOjE2NTk2MzcwNTQsImV4cCI6MTY1OTY0NDI1NCwiaWF0IjoxNjU5NjM3MDU0fQ.2cL5pSm3Ax5XQkHJIjnn9BOnIPLAXeUliioH-565g6U',
       },
     });
 
