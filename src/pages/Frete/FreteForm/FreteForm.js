@@ -22,6 +22,7 @@ import {
 import Menus from "../../../components/Menus/Menus";
 
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contexts/Auth/useAuth";
 
 const Transition = forwardRef(function Transition(props, ref) {
 	return <Slide direction="up" ref={ref} {...props} />;
@@ -66,6 +67,7 @@ const FreteForm = () => {
 	const [listaEstados, setListaEstados] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [openDialog, setOpenDialog] = useState(false);
+	const { token } = useAuth();
 	const [dialog, setDialog] = useState({
 		title: "",
 		text: "",
@@ -76,10 +78,10 @@ const FreteForm = () => {
 	useEffect(() => {
 		(async () => {
 			setLoading(true);
-			setListaEstados((await getEstados()) || []);
+			setListaEstados((await getEstados(token)) || []);
 			setLoading(false);
 		})();
-	}, []);
+	}, [token]);
 
 	const handleChange = (event) => {
 		setValues({
@@ -129,10 +131,13 @@ const FreteForm = () => {
 
 	const handleSubmit = async () => {
 		if (validaDados()) {
-			const response = await setNovaRegraDeFrete({
-				estadoId: values.estado.value,
-				valor: parseFloat(values.valor.value),
-			});
+			const response = await setNovaRegraDeFrete(
+				{
+					estadoId: values.estado.value,
+					valor: parseFloat(values.valor.value),
+				},
+				token
+			);
 
 			if (response.ok) {
 				setDialog({
