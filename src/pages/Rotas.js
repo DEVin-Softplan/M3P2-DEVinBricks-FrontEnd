@@ -11,6 +11,7 @@ import UsuariosForm from "./Usuarios/UsuarioForm/UsuariosForm";
 import Comprador from "./Compradores/Comprador";
 import CompradorForm from "./Compradores/Comprador";
 import FreteForm from "./Frete/FreteForm/FreteForm";
+import Frete from "./Frete/FreteLista/Frete";
 
 const Rotas = () => {
 	return (
@@ -28,6 +29,7 @@ const Rotas = () => {
 				<Route path="/UsuariosForm" exact element={<UsuariosForm />} />
 				<Route path="/NovoUsuario" exact element={<UsuariosForm />} />
 				<Route path="/Frete/NovaRegra" exact element={<FreteForm />} />
+				<Route path="/Frete" exact element={<Frete />} />
 				<Route path="/MinhasEntregas" exact element={<Vendas />} />
 				<Route path="/Compradores" exact element={<Comprador />} />
 				<Route path="/NovoComprador" exact element={<CompradorForm />} />
