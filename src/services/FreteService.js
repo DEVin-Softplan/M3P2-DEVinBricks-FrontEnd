@@ -46,3 +46,28 @@ export const setNovaRegraDeFrete = async (param, token) => {
 		console.error(err);
 	}
 };
+
+export const getListaFretePorEstado = async (token) => {
+	try {
+		const response = await fetch(
+			"https://localhost:7171/api/FretePorEstado?page=1&size=30",
+			{
+				headers: {
+					Authorization: `bearer ${token}`,
+				},
+			}
+		);
+
+		if (!response.ok) {
+			throw new Error(
+				`This is an HTTP error: The status is ${response.status}`
+			);
+		}
+
+		let data = await response.json();
+
+		return data;
+	} catch (err) {
+		console.error(err);
+	}
+};
