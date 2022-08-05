@@ -10,47 +10,46 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { VendaContext } from '../../../contexts/VendaContext';
-
-// Simula resultado de uma busca qualquer na API
-const mockProdutosApi = [
-  {
-    id: 1,
-    nome: 'Cimento',
-    valor: 30,
-    quantidade: 0,
-  },
-  {
-    id: 2,
-    nome: 'Tijolo',
-    valor: 2,
-    quantidade: 0,
-  },
-  {
-    id: 3,
-    nome: 'Telha',
-    valor: 10,
-    quantidade: 0,
-  },
-];
+import { getAllProducts } from '../../../services/ProdutosService';
+import { useAuth } from '../../../contexts/Auth/useAuth';
+import Swal from 'sweetalert2';
 
 const VendaProduto = () => {
   const navigate = useNavigate();
+  const { token } = useAuth();
+
   const { adicionarProdutos } = useContext(VendaContext);
 
   const [pesquisaProduto, setPesquisaProduto] = useState('');
   const [listaProdutos, setListaProdutos] = useState([]);
+  const [produtosPesquisados, setProdutosPesquisados] = useState([]);
   const [carrinho, setCarrinho] = useState([]);
   const [desabilitarBotao, setDesabilitarBotao] = useState(true);
+  const [valorTotal, setValorTotal] = useState(0);
+  const [quantidadeItens, setQuantidadeItens] = useState(0);
 
   const notificar = (nome) => toast(`${nome} adicionado ao carrinho`);
 
   const pesquisarProdutos = (event) => {
     event.preventDefault();
-    setListaProdutos(mockProdutosApi);
+
+    const produtosFiltrados = listaProdutos.filter((produtos) =>
+      produtos.nome.includes(pesquisaProduto),
+    );
+
+    setProdutosPesquisados(produtosFiltrados);
+
+    if (produtosFiltrados.length === 0) {
+      Swal.fire(
+        'Nenhum produto encontrado!',
+        'Realize uma nova busca.',
+        'error',
+      );
+    }
   };
 
   const adicionarProduto = (produto) => {
-    setCarrinho([...carrinho, produto]);
+    setCarrinho([...carrinho, { ...produto, quantidade: 1 }]);
     notificar(produto.nome);
   };
 
@@ -59,11 +58,30 @@ const VendaProduto = () => {
     navigate('/VendaResumo');
   };
 
+  const calcularValorTotal = () => {
+    let total = 0;
+    carrinho.forEach((produto) => {
+      total += produto.valor;
+    });
+
+    return total;
+  };
+
   useEffect(() => {
     carrinho.length > 0
       ? setDesabilitarBotao(false)
       : setDesabilitarBotao(true);
+
+    setQuantidadeItens(carrinho.length);
+    setValorTotal(calcularValorTotal());
   }, [carrinho]);
+
+  useEffect(() => {
+    (async () => {
+      const listaProdutosAPI = await getAllProducts(token);
+      setListaProdutos(listaProdutosAPI);
+    })();
+  }, []);
 
   return (
     <>
@@ -73,19 +91,26 @@ const VendaProduto = () => {
         <ToastContainer />
         <div className={styles.headerContainer}>
           <Header title="Nova venda: Produtos" />
-          <span>0 itens | R$ 0,00</span>
+          <span>
+            {quantidadeItens} itens |{' '}
+            {valorTotal.toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
+          </span>
         </div>
 
         <Pesquisa
           placeholder="Pesquise um produto"
           onChange={(value) => setPesquisaProduto(value)}
           onSubmit={pesquisarProdutos}
+          value={pesquisaProduto}
         />
 
-        {listaProdutos.length === 0 ? (
+        {produtosPesquisados.length === 0 ? (
           <AreaPesquisa />
         ) : (
-          listaProdutos.map((produto) => (
+          produtosPesquisados.map((produto) => (
             <CardProduto
               key={produto.id}
               produto={produto}

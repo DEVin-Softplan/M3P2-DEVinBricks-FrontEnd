@@ -12,75 +12,45 @@ import { BsFillEyeFill } from "react-icons/bs"
 import { FaWindowClose } from "react-icons/fa"
 import VendaModal from '../VendaModal/VendaModal';
 import { AiFillDelete } from "react-icons/ai"
-import { MdOutlineArrowBackIos, MdOutlineArrowForwardIos } from "react-icons/md"
+import PageInfo from '../../../components/PageInfo';
+import { formatarMoeda } from '../../../utils/FormatarMoeda';
 
-const venda = {
-    comprador: {
-        nome: "Maria Santos Silva",
-        cpf: "021.234.767-09",
-        email: "manu@gmail.com",
-        telefone: "(48) 989766908"
-    },
-    dadosEntrega: {
-        endereco: "Rua João da Silva, Buriti, Pacajás, Ceará, N° 23",
-        frete: 30,
-        total: 500
-    },
-    carrinho: [{
-        id: 1,
-        img: "https://temdetudomateriais.com.br/wp-content/uploads/2020/12/Sem-titulo-1.png",
-        qtd: 3, produto: "cimento",
-        subTotal: 100
-    },
-    {
-        id: 2,
-        img: "https://temdetudomateriais.com.br/wp-content/uploads/2020/12/Sem-titulo-1.png",
-        qtd: 3, produto: "cimento",
-        subTotal: 100
-    },
-    {
-        id: 3,
-        img: "https://temdetudomateriais.com.br/wp-content/uploads/2020/12/Sem-titulo-1.png",
-        qtd: 3, produto: "cimento",
-        subTotal: 100
-    }
-    ]
+const venda = [{comprador: {
+    nome: "Jose Oliveira",
+    cpf: "221.534.787-02",
+    email: "jose@gmail.com",
+    telefone: "(48) 986487894"
+},
+dadosEntrega: {
+    endereco: "Rua da Creche, Costeira do Pirajubaé, Florianópolis, Santa Catarina, N° 23",
+    frete: 20,
+    total: 320
+},
+carrinho: [{
+    id: 1,
+    img: "https://temdetudomateriais.com.br/wp-content/uploads/2020/12/Sem-titulo-1.png",
+    qtd: 1, produto: "cimento",
+    subTotal: 100
+},
+{
+    id: 2,
+    img: "https://temdetudomateriais.com.br/wp-content/uploads/2020/12/Sem-titulo-1.png",
+    qtd: 1, produto: "cimento",
+    subTotal: 100
+},
+{
+    id: 3,
+    img: "https://temdetudomateriais.com.br/wp-content/uploads/2020/12/Sem-titulo-1.png",
+    qtd: 1, produto: "cimento",
+    subTotal: 100
+}]
 }
-
-const dadosVenda = [
-    {
-        id: 1,
-        cpf: "25986689983",
-        cliente: "Joao da silva", 
-        valor: 100
-    },
-    {
-        id: 2,
-        cpf: "25986689983",
-        cliente: "Joao da silva", 
-        valor: 100
-    },
-    {
-        id: 3,
-        cpf: "25986689983",
-        cliente: "Joao da silva", 
-        valor: 100
-    },
-    {
-        id: 4,
-        cpf: "25986689983",
-        cliente: "Joao da silva", 
-        valor: 100
-    },
-    {
-        id: 5,
-        cpf: "25986689983",
-        cliente: "Joao da silva", 
-        valor: 100
-    },
 ]
 
 export default function VendasLista() {
+
+    const maxQtdPagina = 3;
+
     const [modalisopen, setIsOpen] = useState(false);
     function openModal() {
         setIsOpen(true);
@@ -89,20 +59,32 @@ export default function VendasLista() {
         setIsOpen(false);
     }
 
-    const [page, setPage] = useState(1);
-    function nextPage() {
-        setPage(page+1);
-    }
-    function prevPage() {
-        if(page !== 1) setPage(page-1);
-    }
+    const [pagina, setPagina] = useState(1);
+    const handlePreviousPage = () =>{
+        setPagina((currentPage)=> (currentPage > 1 ? currentPage -1 : 1));
+      };
+    
+    const handleNextPage = () =>{
+    setPagina((currentPage)=> (currentPage >= maxQtdPagina ? maxQtdPagina : currentPage + 1));
+    };
+
+    const pageInfo =  {
+    currentPage: pagina,
+    totalPages: maxQtdPagina
+    };
 
     return (
         <TableContainer 
         component={Paper} 
         className={styles.table}>
         <Table sx={{ minWidth: 250 }}  aria-label="caption table">
-          <caption></caption>
+        <caption>
+            <PageInfo
+              pageInfo={pageInfo}
+              PaginaAnterior={handlePreviousPage}
+              ProximaPagina={handleNextPage}              
+            />
+          </caption>
           <TableHead>
             <TableRow>
               <TableCell align="left">CPF</TableCell>
@@ -112,11 +94,11 @@ export default function VendasLista() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {dadosVenda.map((row) => (
+            {venda.map((row) => (
               <TableRow key={row.id}>
-                <TableCell align="left">{row.cpf}</TableCell>
-                <TableCell align="left">{row.cliente}</TableCell>
-                <TableCell align="left">R$ {row.valor}</TableCell>
+                <TableCell align="left">{row.comprador.cpf}</TableCell>
+                <TableCell align="left">{row.comprador.nome}</TableCell>
+                <TableCell align="left">{formatarMoeda(row.dadosEntrega.total)}</TableCell>
                 <TableCell align="center">
                     <a className={styles.actionIcon}><AiFillDelete size={25} /></a>
                     <a className={styles.actionIcon}><BsFillEyeFill size={25} onClick={openModal}></BsFillEyeFill></a>
@@ -129,7 +111,7 @@ export default function VendasLista() {
                         >
                         <div className="Container">
                             <FaWindowClose className='closeButton' size={28} onClick={closeModal}/>
-                            <VendaModal comprador={venda.comprador} dadosEntrega={venda.dadosEntrega} carrinho={venda.carrinho}/>
+                            <VendaModal comprador={row.comprador} dadosEntrega={row.dadosEntrega} carrinho={row.carrinho}/>
                         </div>
                         </Modal>
                 </TableCell>                
@@ -137,7 +119,6 @@ export default function VendasLista() {
             ))}
           </TableBody>
         </Table>
-        <span className={styles.pages}><MdOutlineArrowBackIos onClick={prevPage}/>   <label className={styles.pageNumber}>{page}</label>   <MdOutlineArrowForwardIos onClick={nextPage}/></span>
       </TableContainer>
     );
 }

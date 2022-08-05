@@ -1,6 +1,6 @@
 export const loginUser = async (param) => {
 	try {
-		const response = await fetch('https://localhost:7171/Login', {
+		const response = await fetch('https://localhost:7171/api/Login', {
 			method: 'POST',
 			body: JSON.stringify(param),
 			headers: {

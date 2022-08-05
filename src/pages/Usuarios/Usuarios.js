@@ -1,13 +1,12 @@
 import React from "react";
 import style from "./Usuarios.module.css";
 import Menus from "../../components/Menus";
-import UsuariosLista from "./UsuariosLista";
+import UsuarioLista from "./UsuarioLista/UsuarioLista";
 
 const Usuarios = () => {
-  //Make the rendering as deal with the requisition (form or list)
 
   const handerProductPage = () => {
-    return <UsuariosLista />;
+    return <UsuarioLista />;
   };
   return (
     <main className={style.main}>

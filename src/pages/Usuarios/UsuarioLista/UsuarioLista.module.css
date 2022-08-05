@@ -1,0 +1,97 @@
+.Main{
+    display: flex;
+}
+
+.Container{
+    width: 55vw;
+    min-height: 20vw;
+    margin: 2vw 35vh;
+}
+
+.NovoUsuario{
+    display: flex;
+    margin: 1vh 2vw;
+    text-align: center;
+    justify-content: space-between;    
+}
+
+.NovoUsuario h1 {
+    color: rgb(101, 101, 254);
+}
+
+.Button{
+    background: rgb(101, 101, 254);
+    color:var(--white);
+    transition: ease 0.5s;
+    padding: 0.5vh 0.5vw;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    border: none;
+}
+
+.Button:hover{
+    background-color: rgb(44, 95, 249);
+}
+
+.Input{
+    width: 50vw;
+    height: 4vw;
+    margin: 0.5vw 5vh;
+    border-radius: 0.5vw;
+}
+
+.tabela{
+    width: 50vw;
+    margin: auto;
+}
+.nivel{
+    width: 5vw;
+    text-align: center;
+}
+.nome{
+    width: 10vw;
+    text-align: center;
+}
+
+.email{
+    width: 13vw;
+    text-align: center;
+}
+
+.usuario{
+    width: 7vw;
+    text-align: center;
+}
+.acoes{
+    width: 5vw;
+    text-align: center;
+}
+.nivelTitulo{
+    width: 5vw;
+    text-align: center;
+    background-color: rgb(159, 145, 231);
+    font-weight: bold;
+}
+.nomeTitulo{
+    width: 10vw;
+    text-align: center;
+    background-color: rgb(159, 145, 231);
+}
+
+.emailTitulo{
+    width: 13vw;
+    text-align: center;
+    background-color: rgb(159, 145, 231);
+}
+
+.usuarioTitulo{    
+    width: 7vw;
+    text-align: center;
+    background-color: rgb(159, 145, 231);
+}
+
+.acoesTitulo{
+    width: 5vw;
+    text-align: center;
+    background-color: rgb(159, 145, 231);
+}
