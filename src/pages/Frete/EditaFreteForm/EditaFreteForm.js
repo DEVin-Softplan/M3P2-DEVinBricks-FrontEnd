@@ -67,6 +67,7 @@ const EditaFreteForm = () => {
 	const [listaEstados, setListaEstados] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [openDialog, setOpenDialog] = useState(false);
+	const [regraDeFrete, setRegraDeFrete] = useState();
 	const { token } = useAuth();
 	const [dialog, setDialog] = useState({
 		title: "",
@@ -86,6 +87,7 @@ const EditaFreteForm = () => {
 						(estado) => estado.id === parseInt(idRegra)
 					);
 					const frete = await consultaFrete(token, estado.nome);
+					setRegraDeFrete(frete[0]);
 					setValues({
 						valor: {
 							error: false,
@@ -149,8 +151,9 @@ const EditaFreteForm = () => {
 	const handleSubmit = async () => {
 		if (validaDados()) {
 			const response = await atualizaRegraDeFrete(
-				idRegra,
+				regraDeFrete.id,
 				{
+					id: parseInt(regraDeFrete.id),
 					valor: parseFloat(values.valor.value),
 				},
 				token
