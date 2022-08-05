@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Button from '../../../components/Button';
 import Header from '../../../components/Header/Header';
 import styles from './CompradorForm.module.css';
@@ -12,6 +12,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 const CompradorForm = () => {
   const params = useParams();
+  const navigate = useNavigate()
 
   const [comprador, setcomprador] = useState({
     id: '',
@@ -42,6 +43,9 @@ const CompradorForm = () => {
     })
   }
 
+  const handleClick = () => {
+    navigate('/compradores')
+  }
   const sendComprador = async () => {
     let response;
     if (params.id) {
@@ -77,7 +81,7 @@ const CompradorForm = () => {
           </LocalizationProvider>
         </form>
         <footer className={styles.footer}>
-          <Button variant="contained">Voltar</Button>
+          <Button variant="contained" onClick={handleClick}>Voltar</Button>
           <Button variant="contained" onClick={sendComprador} >{params.labelButton}</Button>
         </footer>
       </section>
