@@ -1,5 +1,4 @@
 {
-    "prettier.vueIndentScriptAndStyle": true,
     "prettier.trailingComma": "es5",
     "prettier.resolveGlobalModules": false,
     "prettier.requireConfig": false,
