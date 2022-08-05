@@ -25,6 +25,8 @@ const VendaProduto = () => {
   const [produtosPesquisados, setProdutosPesquisados] = useState([]);
   const [carrinho, setCarrinho] = useState([]);
   const [desabilitarBotao, setDesabilitarBotao] = useState(true);
+  const [valorTotal, setValorTotal] = useState(0);
+  const [quantidadeItens, setQuantidadeItens] = useState(0);
 
   const notificar = (nome) => toast(`${nome} adicionado ao carrinho`);
 
@@ -47,7 +49,7 @@ const VendaProduto = () => {
   };
 
   const adicionarProduto = (produto) => {
-    setCarrinho([...carrinho, produto]);
+    setCarrinho([...carrinho, { ...produto, quantidade: 1 }]);
     notificar(produto.nome);
   };
 
@@ -56,10 +58,22 @@ const VendaProduto = () => {
     navigate('/VendaResumo');
   };
 
+  const calcularValorTotal = () => {
+    let total = 0;
+    carrinho.forEach((produto) => {
+      total += produto.valor;
+    });
+
+    return total;
+  };
+
   useEffect(() => {
     carrinho.length > 0
       ? setDesabilitarBotao(false)
       : setDesabilitarBotao(true);
+
+    setQuantidadeItens(carrinho.length);
+    setValorTotal(calcularValorTotal());
   }, [carrinho]);
 
   useEffect(() => {
@@ -77,7 +91,13 @@ const VendaProduto = () => {
         <ToastContainer />
         <div className={styles.headerContainer}>
           <Header title="Nova venda: Produtos" />
-          <span>0 itens | R$ 0,00</span>
+          <span>
+            {quantidadeItens} itens |{' '}
+            {valorTotal.toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
+          </span>
         </div>
 
         <Pesquisa
