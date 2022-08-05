@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './UsuarioLista.module.css';
-
+import Button from '../../../components/Button';
 
 
 const UsuarioLista = () => {
@@ -47,7 +48,7 @@ if(carregando){
   <div className={styles.Container}>
     <div className={styles.NovoUsuario}>
       <h1>Usuários</h1>
-      <button className={styles.Button}>Novo Usuário</button>
+      <Link to="/NovoUsuario"><Button variant="contained">Novo Usuário</Button></Link>
     </div>
     <div>
       <input 

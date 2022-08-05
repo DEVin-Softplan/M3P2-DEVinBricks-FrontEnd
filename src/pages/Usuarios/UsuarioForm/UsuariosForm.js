@@ -15,7 +15,8 @@ const UsuariosForm = () => {
     initialValues: {
       nome: "",
       email: "",
-      usuario: "",
+      login: "",
+      admin: false,
     },
     validationSchema: yup.object({
       nome: yup.string().required("O campo é obrigatório."),
@@ -23,7 +24,10 @@ const UsuariosForm = () => {
         .string()
         .email("E-mail inválido.")
         .required("O campo é obrigatório."),
-      usuario: yup.string().required("O campo é obrigatório."),
+      login: yup.string().required("O campo é obrigatório."),
+      admin: yup
+        .bool()
+        .required("O campo é obrigatório."),
     }),
     onSubmit: (values) => {
       alert(JSON.stringify(values));
@@ -63,26 +67,35 @@ const UsuariosForm = () => {
           />
           <TextField
             fullWidth
-            id="usuario"
-            name="usuario"
-            label="Usuario"
+            id="login"
+            name="login"
+            label="Login"
             variant="outlined"
-            value={formik.values.usuario}
+            value={formik.values.login}
             onChange={formik.handleChange}
-            error={formik.touched.usuario && Boolean(formik.errors.usuario)}
-            helperText={formik.touched.usuario && formik.errors.usuario}
+            error={formik.touched.login && Boolean(formik.errors.login)}
+            helperText={formik.touched.login && formik.errors.login}
           />
           <FormGroup>
             <FormControlLabel
+              id="admin"
+              name="admin"
+              variant="outlined"
+              value={formik.values.admin}
+              onChange={formik.handleChange}
+              error={formik.touched.admin && Boolean(formik.errors.admin)}
+              helperText={formik.touched.admin && formik.errors.admin}
               control={<Switch defaultChecked />}
               label="É usuário admin?"
             />
           </FormGroup>
           <div>
-            <Link to="/">
+            <Link to="/Usuarios">
               <Button variant="contained">Voltar</Button>
             </Link>
-            <Button variant="contained" type="submit">Cadastrar</Button>
+            <Button variant="contained" type="submit">
+              Cadastrar
+            </Button>
           </div>
         </form>
       </FormikProvider>
