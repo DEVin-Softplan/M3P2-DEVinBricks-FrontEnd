@@ -11,6 +11,7 @@ import UsuariosForm from "./Usuarios/UsuarioForm/UsuariosForm";
 import Comprador from "./Compradores/Comprador";
 import CompradorForm from "./Compradores/Comprador";
 import FreteForm from "./Frete/FreteForm/FreteForm";
+import Frete from "./Frete/FreteLista/Frete";
 import EditaFreteForm from "./Frete/EditaFreteForm/EditaFreteForm";
 
 const Rotas = () => {
@@ -33,6 +34,7 @@ const Rotas = () => {
 				<Route path="/UsuariosForm" exact element={<UsuariosForm />} />
 				<Route path="/NovoUsuario" exact element={<UsuariosForm />} />
 				<Route path="/Frete/NovaRegra" exact element={<FreteForm />} />
+				<Route path="/Frete" exact element={<Frete />} />
 				<Route
 					path="/Frete/EditaRegra/:idRegra"
 					exact
