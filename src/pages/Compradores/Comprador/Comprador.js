@@ -60,7 +60,9 @@ const Comprador = () => {
                     <Link to={`/NovoComprador/Editar Comprador/Salvar/${row.id}`}>
                       <RiPencilFill size={30} />
                     </Link>
-                    <FaCartArrowDown size={30} />
+                    <Link to={`/VendaProduto`}>
+                      <FaCartArrowDown size={30} />
+                    </Link>
                   </TableCell>
                 </TableRow>
               ))}
