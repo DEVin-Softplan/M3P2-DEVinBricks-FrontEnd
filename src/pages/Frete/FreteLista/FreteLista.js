@@ -28,7 +28,7 @@ export default function FreteLista({listaFretes}) {
               <TableCell align="left">{row.estado.uf}</TableCell>
               <TableCell align="left">R$ {row.valor}</TableCell>
               <TableCell align="center">
-                <Link className={styles.actionIcon} to={`NovaRegra/${row.id}`}>
+                <Link className={styles.actionIcon} to={`NovaRegra/${row.estado.id}`}>
                       <RiPencilFill size={30}/>
                 </Link>
               </TableCell>                
