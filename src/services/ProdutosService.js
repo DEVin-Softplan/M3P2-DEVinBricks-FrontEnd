@@ -1,14 +1,17 @@
-export const getAllProducts = async () =>{
-  try{
-    const data = await fetch('URL DA REQUISICAO',{
-      "method": "GET",
+export const getAllProducts = async (token) => {
+  try {
+    const data = await fetch('https://localhost:7171/api/Produto', {
+      method: 'GET',
+      headers: {
+        Authorization: `bearer ${token}`,
+      },
     });
-    
-    if(data){
+
+    if (data) {
       const listaProdutos = await data.json();
       return listaProdutos;
     }
-  }catch(error){
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   }
 };

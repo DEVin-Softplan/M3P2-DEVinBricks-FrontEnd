@@ -1,9 +1,8 @@
-export const getEstados = async () => {
+export const getEstados = async (token) => {
 	try {
 		const response = await fetch(`https://localhost:7171/api/Estados`, {
 			headers: {
-				Authorization:
-					"bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwibmFtZSI6IkFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpc19hZG1pbiI6IlRydWUiLCJuYmYiOjE2NTkyOTcxMzIsImV4cCI6MTY1OTMwNDMzMiwiaWF0IjoxNjU5Mjk3MTMyfQ.12YYAxdu-a5i-LJqaG7G5UItfz0Msku5dbzoOlTSFCc",
+				Authorization: `bearer ${token}`,
 			},
 		});
 
@@ -23,7 +22,7 @@ export const getEstados = async () => {
 	}
 };
 
-export const setNovaRegraDeFrete = async (param) => {
+export const setNovaRegraDeFrete = async (param, token) => {
 	try {
 		const response = await fetch(
 			"https://localhost:7171/api/FretePorEstado/novo",
@@ -32,8 +31,7 @@ export const setNovaRegraDeFrete = async (param) => {
 				body: JSON.stringify(param),
 				headers: {
 					"Content-Type": "application/json; charset=utf-8",
-					Authorization:
-						"bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwibmFtZSI6IkFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpc19hZG1pbiI6IlRydWUiLCJuYmYiOjE2NTkyOTcxMzIsImV4cCI6MTY1OTMwNDMzMiwiaWF0IjoxNjU5Mjk3MTMyfQ.12YYAxdu-a5i-LJqaG7G5UItfz0Msku5dbzoOlTSFCc",
+					Authorization: `bearer ${token}`,
 				},
 			}
 		);
@@ -48,3 +46,52 @@ export const setNovaRegraDeFrete = async (param) => {
 		console.error(err);
 	}
 };
+
+export const atualizaRegraDeFrete = async (id, param, token) => {
+	try {
+		const response = await fetch(
+			`https://localhost:7171/api/FretePorEstado/editar/${id}`,
+			{
+				method: "PUT",
+				body: JSON.stringify(param),
+				headers: {
+					"Content-Type": "application/json; charset=utf-8",
+					Authorization: `bearer ${token}`,
+				},
+			}
+		);
+
+		if (response.status === 400) {
+			response.message = "Dados Inconsistentes, verifique o Id.";
+		}
+
+		return response;
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+export const consultaFrete = async (token, nome) => {
+	try {
+		const response = await fetch(
+			`https://localhost:7171/api/FretePorEstado/?nome=${nome}`,
+			{
+				headers: {
+					Authorization: `bearer ${token}`,
+				},
+			}
+		);
+
+		if (!response.ok) {
+			throw new Error(
+				`This is an HTTP error: The status is ${response.status}`
+			);
+		}
+
+		let data = await response.json();
+
+		return data;
+	} catch (err) {
+		console.error(err);
+	}
+}

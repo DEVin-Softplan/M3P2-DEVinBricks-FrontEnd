@@ -13,71 +13,38 @@ import { FaWindowClose } from "react-icons/fa"
 import VendaModal from '../VendaModal/VendaModal';
 import { AiFillDelete } from "react-icons/ai"
 import PageInfo from '../../../components/PageInfo';
+import { formatarMoeda } from '../../../utils/FormatarMoeda';
 
-const venda = {
-    comprador: {
-        nome: "Maria Santos Silva",
-        cpf: "021.234.767-09",
-        email: "manu@gmail.com",
-        telefone: "(48) 989766908"
-    },
-    dadosEntrega: {
-        endereco: "Rua João da Silva, Buriti, Pacajás, Ceará, N° 23",
-        frete: 30,
-        total: 500
-    },
-    carrinho: [{
-        id: 1,
-        img: "https://temdetudomateriais.com.br/wp-content/uploads/2020/12/Sem-titulo-1.png",
-        qtd: 3, produto: "cimento",
-        subTotal: 100
-    },
-    {
-        id: 2,
-        img: "https://temdetudomateriais.com.br/wp-content/uploads/2020/12/Sem-titulo-1.png",
-        qtd: 3, produto: "cimento",
-        subTotal: 100
-    },
-    {
-        id: 3,
-        img: "https://temdetudomateriais.com.br/wp-content/uploads/2020/12/Sem-titulo-1.png",
-        qtd: 3, produto: "cimento",
-        subTotal: 100
-    }
-    ]
+const venda = [{comprador: {
+    nome: "Jose Oliveira",
+    cpf: "221.534.787-02",
+    email: "jose@gmail.com",
+    telefone: "(48) 986487894"
+},
+dadosEntrega: {
+    endereco: "Rua da Creche, Costeira do Pirajubaé, Florianópolis, Santa Catarina, N° 23",
+    frete: 20,
+    total: 320
+},
+carrinho: [{
+    id: 1,
+    img: "https://temdetudomateriais.com.br/wp-content/uploads/2020/12/Sem-titulo-1.png",
+    qtd: 1, produto: "cimento",
+    subTotal: 100
+},
+{
+    id: 2,
+    img: "https://temdetudomateriais.com.br/wp-content/uploads/2020/12/Sem-titulo-1.png",
+    qtd: 1, produto: "cimento",
+    subTotal: 100
+},
+{
+    id: 3,
+    img: "https://temdetudomateriais.com.br/wp-content/uploads/2020/12/Sem-titulo-1.png",
+    qtd: 1, produto: "cimento",
+    subTotal: 100
+}]
 }
-
-const dadosVenda = [
-    {
-        id: 1,
-        cpf: "25986689983",
-        cliente: "Joao da silva", 
-        valor: 100
-    },
-    {
-        id: 2,
-        cpf: "25986689983",
-        cliente: "Joao da silva", 
-        valor: 100
-    },
-    {
-        id: 3,
-        cpf: "25986689983",
-        cliente: "Joao da silva", 
-        valor: 100
-    },
-    {
-        id: 4,
-        cpf: "25986689983",
-        cliente: "Joao da silva", 
-        valor: 100
-    },
-    {
-        id: 5,
-        cpf: "25986689983",
-        cliente: "Joao da silva", 
-        valor: 100
-    },
 ]
 
 export default function VendasLista() {
@@ -127,11 +94,11 @@ export default function VendasLista() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {dadosVenda.map((row) => (
+            {venda.map((row) => (
               <TableRow key={row.id}>
-                <TableCell align="left">{row.cpf}</TableCell>
-                <TableCell align="left">{row.cliente}</TableCell>
-                <TableCell align="left">R$ {row.valor}</TableCell>
+                <TableCell align="left">{row.comprador.cpf}</TableCell>
+                <TableCell align="left">{row.comprador.nome}</TableCell>
+                <TableCell align="left">{formatarMoeda(row.dadosEntrega.total)}</TableCell>
                 <TableCell align="center">
                     <a className={styles.actionIcon}><AiFillDelete size={25} /></a>
                     <a className={styles.actionIcon}><BsFillEyeFill size={25} onClick={openModal}></BsFillEyeFill></a>
@@ -144,7 +111,7 @@ export default function VendasLista() {
                         >
                         <div className="Container">
                             <FaWindowClose className='closeButton' size={28} onClick={closeModal}/>
-                            <VendaModal comprador={venda.comprador} dadosEntrega={venda.dadosEntrega} carrinho={venda.carrinho}/>
+                            <VendaModal comprador={row.comprador} dadosEntrega={row.dadosEntrega} carrinho={row.carrinho}/>
                         </div>
                         </Modal>
                 </TableCell>                

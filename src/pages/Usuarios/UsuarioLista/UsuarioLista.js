@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './UsuarioLista.module.css';
-import Button from '../../../components/Button';
 
+import Button from '../../../components/Button';
 
 const UsuarioLista = () => {
 
@@ -12,6 +12,7 @@ const [usuariosFiltrados, setUsuariosFiltrado] = useState([]);
 const [termoBusca, setTermoBusca] = useState("");
 
 useEffect(() => {
+  var token = localStorage.getItem('token');
   fetch(`https://localhost:7171/api/Usuario?nome=sem%20nome&login=sem%20login&tamanho=0&pagina=1`, { 
     method: 'GET', 
     headers: new Headers({
@@ -48,11 +49,14 @@ if(carregando){
   <div className={styles.Container}>
     <div className={styles.NovoUsuario}>
       <h1>Usuários</h1>
-      <Link to="/NovoUsuario"><Button variant="contained">Novo Usuário</Button></Link>
+      <Link to='/NovoUsuario' >
+        <button className={styles.Button}>Novo Usuário</button>
+      </Link>
+
     </div>
     <div>
       <input 
-      placeholder='  Pesquise pelo nome' 
+      placeholder='  Pesquise pelo nome ou usuário' 
       className={styles.Input}
         onChange={(event) => {
           setTermoBusca(event.target.value)
@@ -61,7 +65,7 @@ if(carregando){
       />
     </div>
     <div>       
-    <table border={1} className={styles.tabela}>
+    <table className={styles.tabela}>
           <tr>
             <th className={styles.nivelTitulo}>Nivel</th> 
             <th className={styles.nomeTitulo}>Nome</th>
@@ -73,12 +77,12 @@ if(carregando){
         {usuariosFiltrados.length === 0 
           ? 'Nenhum usuário encontrado'
           : usuariosFiltrados.map((usuario) =>                       
-        <table border={1} className={styles.tabela}>
+        <table className={styles.tabela}>
           <tr>          
             <td className={styles.nivel}> {usuario.admin === false ? 'Comum' : 'Admin'} </td>
             <td className={styles.nome}>{usuario.nome} </td> 
             <td className={styles.email}>{usuario.email}</td> 
-            <td className={styles.login}>{usuario.login}</td>
+            <td className={styles.usuario}>{usuario.login}</td>
             <td className={styles.acoes}>icons</td>
           </tr>       
         </table>
