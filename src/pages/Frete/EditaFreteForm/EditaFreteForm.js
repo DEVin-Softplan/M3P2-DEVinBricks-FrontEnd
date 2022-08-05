@@ -1,5 +1,5 @@
 import { forwardRef, React, useEffect, useState } from "react";
-import style from "./FreteForm.module.css";
+import style from "./EditaFreteForm.module.css";
 import {
 	Alert,
 	Button,
@@ -9,19 +9,19 @@ import {
 	DialogContent,
 	DialogContentText,
 	DialogTitle,
-	MenuItem,
 	Slide,
 	TextField,
 } from "@mui/material";
 import Header from "../../../components/Header/Header";
 import NumberFormat from "react-number-format";
 import {
+	atualizaRegraDeFrete,
+	consultaFrete,
 	getEstados,
-	setNovaRegraDeFrete,
 } from "../../../services/FreteService";
 import Menus from "../../../components/Menus/Menus";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../../contexts/Auth/useAuth";
 
 const Transition = forwardRef(function Transition(props, ref) {
@@ -53,17 +53,17 @@ const NumberFormatCustom = forwardRef(function NumberFormatCustom(props, ref) {
 	);
 });
 
-const FreteForm = () => {
+const EditaFreteForm = () => {
 	const [values, setValues] = useState({
 		valor: {
 			error: false,
 			value: "",
 		},
 		estado: {
-			error: false,
 			value: "",
 		},
 	});
+	let { idRegra } = useParams();
 	const [listaEstados, setListaEstados] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [openDialog, setOpenDialog] = useState(false);
@@ -79,11 +79,27 @@ const FreteForm = () => {
 		(async () => {
 			setLoading(true);
 			if (token) {
-				setListaEstados((await getEstados(token)) || []);
+				const estados = await getEstados(token);
+				await setListaEstados(estados || []);
+				if (estados.length > 0) {
+					const estado = estados.find(
+						(estado) => estado.id === parseInt(idRegra)
+					);
+					const frete = await consultaFrete(token, estado.nome);
+					setValues({
+						valor: {
+							error: false,
+							value: frete[0].valor,
+						},
+						estado: {
+							value: `${estado.uf} - ${estado.nome}`,
+						},
+					});
+				}
 			}
 			setLoading(false);
 		})();
-	}, [token]);
+	}, [token, idRegra]);
 
 	const handleChange = (event) => {
 		setValues({
@@ -103,7 +119,6 @@ const FreteForm = () => {
 					value: values.valor.value,
 				},
 				estado: {
-					error: values.estado.value === "",
 					value: values.estado.value,
 				},
 			});
@@ -133,9 +148,9 @@ const FreteForm = () => {
 
 	const handleSubmit = async () => {
 		if (validaDados()) {
-			const response = await setNovaRegraDeFrete(
+			const response = await atualizaRegraDeFrete(
+				idRegra,
 				{
-					estadoId: values.estado.value,
 					valor: parseFloat(values.valor.value),
 				},
 				token
@@ -143,8 +158,8 @@ const FreteForm = () => {
 
 			if (response.ok) {
 				setDialog({
-					title: "Cadastro efetuado com sucesso!",
-					text: "Nova regra de frete cadastrada com sucesso! ",
+					title: "Atualização efetuad com sucesso!",
+					text: "Regra de frete atualizada com sucesso! ",
 					callback: () => {
 						resetDados();
 						setOpenDialog(false);
@@ -178,7 +193,7 @@ const FreteForm = () => {
 		<>
 			<Menus />
 			<div className={style.wrapper}>
-				<Header title="Nova regra" />
+				<Header title="Editar regra" />
 				<section className={style.container}>
 					{loading && <CircularProgress />}
 					{!loading && listaEstados.length === 0 && (
@@ -197,27 +212,12 @@ const FreteForm = () => {
 					{!loading && listaEstados.length > 0 && (
 						<form className={style.form}>
 							<TextField
-								id="estado"
-								fullWidth
 								label="Estado"
+								disabled
+								value={values.estado.value}
 								name="estado"
 								variant="outlined"
-								onChange={handleChange}
-								error={values.estado.error}
-								helperText={values.estado.error ? "Selecione um estado" : " "}
-								className={style.input}
-								inputProps={{ "data-testid": "estados" }}
-								select
-								value={values.estado.value}
-								sx={{ height: "70px" }}
-							>
-								{listaEstados.length > 0 &&
-									listaEstados.map((estado) => (
-										<MenuItem key={estado.id} value={estado.id}>
-											{estado.uf} - {estado.nome}
-										</MenuItem>
-									))}
-							</TextField>
+							/>
 							<TextField
 								label="Valor"
 								value={values.valor.value}
@@ -249,9 +249,9 @@ const FreteForm = () => {
 							<Button
 								variant="contained"
 								onClick={handleSubmit}
-								data-testid="cadastrar"
+								data-testid="atualizar"
 							>
-								Cadastrar
+								Atualizar
 							</Button>
 						</footer>
 					)}
@@ -279,4 +279,4 @@ const FreteForm = () => {
 	);
 };
 
-export default FreteForm;
+export default EditaFreteForm;
