@@ -78,7 +78,9 @@ const FreteForm = () => {
 	useEffect(() => {
 		(async () => {
 			setLoading(true);
-			setListaEstados((await getEstados(token)) || []);
+			if (token) {
+				setListaEstados((await getEstados(token)) || []);
+			}
 			setLoading(false);
 		})();
 	}, [token]);
@@ -146,7 +148,7 @@ const FreteForm = () => {
 					callback: () => {
 						resetDados();
 						setOpenDialog(false);
-						navigate("/");
+						navigate("/Frete");
 					},
 				});
 				setOpenDialog(true);
@@ -238,7 +240,7 @@ const FreteForm = () => {
 								color="secondary"
 								variant="contained"
 								onClick={() => {
-									navigate("/");
+									navigate("/Frete");
 								}}
 								data-testid="voltar"
 							>
