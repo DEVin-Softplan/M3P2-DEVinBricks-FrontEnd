@@ -52,8 +52,10 @@ const VendaProduto = () => {
     if (carrinho.length === 0 || !carrinho.some(some => some.id === produto.id)) {
       setCarrinho([...carrinho, { ...produto, quantidade: 1 }]);
     } else {
-      const itemIndex = carrinho.findIndex(find => find.id === produto.id)
-      carrinho[itemIndex].quantidade++
+      const handlerCarrinho = carrinho;
+      const itemIndex = handlerCarrinho.findIndex(find => find.id === produto.id);
+      handlerCarrinho[itemIndex].quantidade++;
+      setCarrinho([...handlerCarrinho]);
     }
     notificar(produto.nome);
   };
@@ -66,18 +68,22 @@ const VendaProduto = () => {
   const calcularValorTotal = () => {
     let total = 0;
     carrinho.forEach((produto) => {
-      total += produto.valor;
+      total += produto.valor * produto.quantidade;
     });
 
     return total;
   };
 
   useEffect(() => {
-    carrinho.length > 0
-      ? setDesabilitarBotao(false)
-      : setDesabilitarBotao(true);
-
-    setQuantidadeItens(carrinho.length);
+    if (carrinho.length > 0) {
+      setDesabilitarBotao(false);
+      let totalItens = 0
+      carrinho.forEach(each => totalItens += each.quantidade)
+      setQuantidadeItens(totalItens);
+    } else {
+      setDesabilitarBotao(true);
+    }
+    
     setValorTotal(calcularValorTotal());
   }, [carrinho]);
 
@@ -97,7 +103,7 @@ const VendaProduto = () => {
         <div className={styles.headerContainer}>
           <Header title="Nova venda: Produtos" />
           <span>
-            {quantidadeItens} itens |{' '}
+            {quantidadeItens} {quantidadeItens < 2 ? 'item' : 'itens'} |{' '}
             {valorTotal.toLocaleString('pt-br', {
               style: 'currency',
               currency: 'BRL',
