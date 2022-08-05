@@ -8,6 +8,7 @@ import Paper from '@mui/material/Paper';
 import styles from './FreteLista.module.css';
 import { RiPencilFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import { formatarMoeda } from '../../../utils/FormatarMoeda';
 
 export default function FreteLista({listaFretes}) {
   return (
@@ -26,7 +27,7 @@ export default function FreteLista({listaFretes}) {
           {listaFretes.map((row) => (
             <TableRow key={row.id}>
               <TableCell align="left">{row.estado.uf}</TableCell>
-              <TableCell align="left">R$ {row.valor}</TableCell>
+              <TableCell align="left">{formatarMoeda(row.valor)}</TableCell>
               <TableCell align="center">
                 <Link className={styles.actionIcon} to={`EditaRegra/${row.estado.id}`}>
                       <RiPencilFill size={30}/>
