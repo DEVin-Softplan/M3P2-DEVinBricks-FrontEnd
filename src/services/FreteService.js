@@ -94,4 +94,3 @@ export const consultaFrete = async (token, nome) => {
 	} catch (err) {
 		console.error(err);
 	}
-};
