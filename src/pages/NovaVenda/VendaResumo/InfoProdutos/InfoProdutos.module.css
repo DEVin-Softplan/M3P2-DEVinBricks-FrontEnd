@@ -1,0 +1,10 @@
+.containerProdutos {
+    margin: 10px 0;
+}
+
+.tabelaProdutos {
+    width: 100%;
+}
+th, td {
+    padding: 2px 10px;
+}

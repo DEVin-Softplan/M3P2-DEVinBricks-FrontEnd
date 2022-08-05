@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Login";
 import VendaProduto from "./NovaVenda/VendaProduto/VendaProduto";
-import VendaResumo from "./NovaVenda/VendaResumo";
+import VendaResumo from "./NovaVenda/VendaResumo/VendaResumo";
 import Produtos from "./Produtos/Produtos";
 import ProdutosForm from "./Produtos/ProdutosForm";
 import Home from "./Home/Home";
