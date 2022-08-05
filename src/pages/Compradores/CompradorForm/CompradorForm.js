@@ -6,6 +6,9 @@ import Header from '../../../components/Header/Header';
 import styles from './CompradorForm.module.css';
 import { cliente } from '../../../services/BaseService';
 import Menus from '../../../components/Menus';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 const CompradorForm = () => {
   const params = useParams();
@@ -21,7 +24,7 @@ const CompradorForm = () => {
   })
 
   useEffect(() => {
-    cliente.post('/api/Comprador?nome=&cpf=')
+    cliente.get(`/api/Comprador/${params.id}`)
       .then(res => {
         setcomprador(res.data)
       })
@@ -42,7 +45,7 @@ const CompradorForm = () => {
   const sendComprador = async () => {
     let response;
     if (params.id) {
-      response = await cliente.put(`/api/Comprador/${params.id}`, comprador)
+      response = await cliente.patch(`/api/Comprador/${params.id}`, comprador)
     } else {
       response = await cliente.post(`/api/Comprador`, comprador)
     }
@@ -57,11 +60,21 @@ const CompradorForm = () => {
       <Header title={params.title} />
       <section className={styles.container}>
         <form className={styles.form}>
-          <TextField name="nome" id="outlined-basic" label="Nome" variant="outlined" sx={{ height: "70px", width: "400px" }} onChange={handleChange} />
-          <TextField name="email" id="outlined-basic" label="Email" variant="outlined" className={styles.input} sx={{ height: "70px", width: "400px" }} onChange={handleChange} />
-          <TextField name="telefone" id="outlined-basic" label="Telefone" variant="outlined" className={styles.input} sx={{ height: "70px", width: "400px" }} onChange={handleChange} />
-          <TextField name="cpf" id="outlined-basic" label="CPF" variant="outlined" className={styles.input} sx={{ height: "70px", width: "400px" }} onChange={handleChange} />
-          <TextField name="dataNascimento" id="outlined-basic" label="Data de Nascimento" variant="outlined" className={styles.input} sx={{ height: "70px", width: "400px" }} onChange={handleChange} />
+          <TextField value={comprador.nome} name="nome" id="outlined-basic" label="Nome" variant="outlined" sx={{ height: "70px", width: "400px" }} onChange={handleChange} />
+          <TextField value={comprador.email} name="email" id="outlined-basic" label="Email" variant="outlined" className={styles.input} sx={{ height: "70px", width: "400px" }} onChange={handleChange} />
+          <TextField value={comprador.telefone} name="telefone" id="outlined-basic" label="Telefone" variant="outlined" className={styles.input} sx={{ height: "70px", width: "400px" }} onChange={handleChange} />
+          <TextField value={comprador.cpf} name="cpf" id="outlined-basic" label="CPF" variant="outlined" className={styles.input} sx={{ height: "70px", width: "400px" }} onChange={handleChange} />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label="Data de Nascimento"
+              value={comprador.dataNascimento}
+              inputFormat="dd.MM.yyyy"
+              onChange={(newValue) => {
+                setcomprador({ ...comprador, dataNascimento: newValue })
+              }}
+              renderInput={(params) => <TextField  {...params} />}
+            />
+          </LocalizationProvider>
         </form>
         <footer className={styles.footer}>
           <Button variant="contained">Voltar</Button>
