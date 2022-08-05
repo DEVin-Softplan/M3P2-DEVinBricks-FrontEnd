@@ -49,7 +49,12 @@ const VendaProduto = () => {
   };
 
   const adicionarProduto = (produto) => {
-    setCarrinho([...carrinho, { ...produto, quantidade: 1 }]);
+    if (carrinho.length === 0 || !carrinho.some(some => some.id === produto.id)) {
+      setCarrinho([...carrinho, { ...produto, quantidade: 1 }]);
+    } else {
+      const itemIndex = carrinho.findIndex(find => find.id === produto.id)
+      carrinho[itemIndex].quantidade++
+    }
     notificar(produto.nome);
   };
 
