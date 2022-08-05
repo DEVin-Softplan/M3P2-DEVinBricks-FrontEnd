@@ -61,8 +61,8 @@ const CompradorForm = () => {
   return (
     <>
       <Menus />
-      <Header title={params.title} />
       <section className={styles.container}>
+        <Header title={params.title} />
         <form className={styles.form}>
           <TextField value={comprador.nome} name="nome" id="outlined-basic" label="Nome" variant="outlined" sx={{ height: "70px", width: "400px" }} onChange={handleChange} />
           <TextField value={comprador.email} name="email" id="outlined-basic" label="Email" variant="outlined" className={styles.input} sx={{ height: "70px", width: "400px" }} onChange={handleChange} />
