@@ -1,5 +1,4 @@
 import { FormControlLabel, FormGroup, Switch, TextField } from "@mui/material";
-import React from "react";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
 import Header from "../../../components/Header";
@@ -7,13 +6,17 @@ import Menus from "../../../components/Menus";
 import style from "./UsuariosForm.module.css";
 import { FormikProvider, useFormik } from "formik";
 import * as yup from "yup";
+import { setNovoUsuario } from "../../../services/UsuarioService";
+
+
 
 const UsuariosForm = () => {
   const formik = useFormik({
     initialValues: {
       nome: "",
       email: "",
-      usuario: "",
+      login: "",
+      admin: false,
     },
     validationSchema: yup.object({
       nome: yup.string().required("O campo é obrigatório."),
@@ -21,14 +24,18 @@ const UsuariosForm = () => {
         .string()
         .email("E-mail inválido.")
         .required("O campo é obrigatório."),
-      usuario: yup.string().required("O campo é obrigatório."),
+      login: yup.string().required("O campo é obrigatório."),
+      admin: yup
+        .bool()
+        .required("O campo é obrigatório."),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      alert(JSON.stringify(values));
+      setNovoUsuario(values)
     },
   });
 
-  const { errors, touched, values, handleSubmit, getFieldProps } = formik;
+  const { handleSubmit } = formik;
 
   return (
     <>
@@ -38,36 +45,57 @@ const UsuariosForm = () => {
           <Header title="Novo usuário" />
           <TextField
             fullWidth
-            label="Nome" {...getFieldProps('nome')}
-            error={Boolean(touched.nome && errors.nome)}
-            helperText={touched.nome && errors.nome}
+            id="nome"
+            name="nome"
+            label="Nome"
             variant="outlined"
+            value={formik.values.nome}
+            onChange={formik.handleChange}
+            error={formik.touched.nome && Boolean(formik.errors.nome)}
+            helperText={formik.touched.nome && formik.errors.nome}
           />
           <TextField
             fullWidth
-            label="Email" {...getFieldProps('email')}
-            error={Boolean(touched.email && errors.email)}
-            helperText={touched.email && errors.email}
+            id="email"
+            name="email"
+            label="email"
             variant="outlined"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
           />
           <TextField
             fullWidth
-            label="Usuario" {...getFieldProps('usuario')}
-            error={Boolean(touched.usuario && errors.usuario)}
-            helperText={touched.usuario && errors.usuario}
+            id="login"
+            name="login"
+            label="Login"
             variant="outlined"
+            value={formik.values.login}
+            onChange={formik.handleChange}
+            error={formik.touched.login && Boolean(formik.errors.login)}
+            helperText={formik.touched.login && formik.errors.login}
           />
           <FormGroup>
             <FormControlLabel
+              id="admin"
+              name="admin"
+              variant="outlined"
+              value={formik.values.admin}
+              onChange={formik.handleChange}
+              error={formik.touched.admin && Boolean(formik.errors.admin)}
+              helperText={formik.touched.admin && formik.errors.admin}
               control={<Switch defaultChecked />}
               label="É usuário admin?"
             />
           </FormGroup>
           <div>
-            <Link to="/UsuariosLista">
+            <Link to="/Usuarios">
               <Button variant="contained">Voltar</Button>
             </Link>
-            <Button variant="contained">Cadastrar</Button>
+            <Button variant="contained" type="submit">
+              Cadastrar
+            </Button>
           </div>
         </form>
       </FormikProvider>

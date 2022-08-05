@@ -7,7 +7,7 @@ const CardProduto = ({ produto, adicionarProduto }) => {
     <main className={styles.container}>
       <section className={styles.infoContainer}>
         <div className={styles.imageContainer}>
-          <BsCartCheck className={styles.image} />
+          <img src={produto.url} alt="Imagem do produto" className={styles.image} />
         </div>
         <div className={styles.productContainer}>
           <h3>{produto.nome}</h3>

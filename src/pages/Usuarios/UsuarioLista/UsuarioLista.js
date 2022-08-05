@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './UsuarioLista.module.css';
 
+import Button from '../../../components/Button';
+
 const UsuarioLista = () => {
 
 const [usuarios, setUsuarios] = useState([]);
@@ -50,6 +52,7 @@ if(carregando){
       <Link to='/NovoUsuario' >
         <button className={styles.Button}>Novo Usuário</button>
       </Link>
+
     </div>
     <div>
       <input 
