@@ -8,7 +8,7 @@ import Menus from '../../../components/Menus';
 import { Link } from 'react-router-dom';
 import Button from '../../../components/Button';
 import { useAuth } from "../../../contexts/Auth/useAuth";
-import { getListaFretePorEstado } from '../../../services/FreteService';
+import { consultaFrete } from '../../../services/FreteService';
 
 const Frete = () => {
     const [listaFretes, setListaFretes] = useState([]);
@@ -16,7 +16,7 @@ const Frete = () => {
 
     useEffect(()=>{(
         async ()=>{
-          const list = await getListaFretePorEstado(token);      
+          const list = await consultaFrete(token,"");      
           setListaFretes(list);          
         })();
       },[]);
