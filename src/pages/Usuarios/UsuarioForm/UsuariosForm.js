@@ -18,7 +18,7 @@ const UsuariosForm = () => {
       nome: "",
       email: "",
       login: "",
-      admin:false,
+      admin:"",
     },
     validationSchema: yup.object({
       nome: yup.string().required("O campo é obrigatório."),
