@@ -5,7 +5,7 @@ import * as yup from "yup";
 import Button from "../../../components/Button";
 import Header from "../../../components/Header";
 import Menus from "../../../components/Menus";
-import { setNovoUsuario } from "../../../services/UsuarioServiceForm";
+import { setNovoUsuario } from "../../../services/UsuarioService";
 import style from "./UsuariosForm.module.css";
 
 const UsuariosForm = () => {
