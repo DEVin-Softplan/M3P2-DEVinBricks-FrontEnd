@@ -23,7 +23,7 @@
     background: rgb(101, 101, 254);
     color:var(--white);
     transition: ease 0.5s;
-    padding: 0.5vh 0.5vw;
+    padding: 2vh 2vw;
     border-radius: 5px;
     font-family: Arial, Helvetica, sans-serif;
     border: none;
@@ -41,57 +41,53 @@
 }
 
 .tabela{
-    width: 50vw;
     margin: auto;
+    width: 50vw;
+    border: 1px rgb(161, 161, 161) solid;
+    background-color: white;
+    height: 7vh;
 }
 .nivel{
-    width: 5vw;
     text-align: center;
+    width:5vw;
 }
 .nome{
-    width: 10vw;
     text-align: center;
+    width:7vw;
 }
 
 .email{
-    width: 13vw;
     text-align: center;
+    width: 25vw;
 }
 
 .usuario{
-    width: 7vw;
     text-align: center;
+    width: 7vw;
 }
 .acoes{
-    width: 5vw;
     text-align: center;
 }
 .nivelTitulo{
-    width: 5vw;
     text-align: center;
-    background-color: rgb(159, 145, 231);
     font-weight: bold;
+    width:5vw;
 }
 .nomeTitulo{
-    width: 10vw;
+    width:7vw;
     text-align: center;
-    background-color: rgb(159, 145, 231);
 }
 
 .emailTitulo{
-    width: 13vw;
+    width: 25vw;
     text-align: center;
-    background-color: rgb(159, 145, 231);
 }
 
 .usuarioTitulo{    
-    width: 7vw;
     text-align: center;
-    background-color: rgb(159, 145, 231);
+    width: 7vw;
 }
 
 .acoesTitulo{
-    width: 5vw;
     text-align: center;
-    background-color: rgb(159, 145, 231);
 }

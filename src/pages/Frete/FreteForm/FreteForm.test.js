@@ -101,7 +101,7 @@ test("should back to Fretes page when Voltar button is clicked", async () => {
 	});
 	fireEvent.click(buttonVoltar);
 	expect(mockedUsedNavigate).toHaveBeenCalledTimes(1);
-	expect(mockedUsedNavigate).toHaveBeenCalledWith("/");
+	expect(mockedUsedNavigate).toHaveBeenCalledWith("/Frete");
 	expect(buttonVoltar).toBeInTheDocument();
 });
 

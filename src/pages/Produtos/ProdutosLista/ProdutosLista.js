@@ -13,11 +13,13 @@ import Header from '../../../components/Header/Header';
 import Pesquisa from '../../../components/Pesquisa';
 import Button from '../../../components/Button';
 import PageInfo from '../../../components/PageInfo';
+import { useAuth } from "../../../contexts/Auth/useAuth";
 
-import { getAllProdutos } from './../../../test/mock/ProdutosMock';
+import { getAllProducts } from './../../../services/ProdutosService';
 import { formatarMoeda } from './../../../utils/FormatarMoeda';
 
 const ProdutosLista = (props) => {
+  const { token } = useAuth();
 
   const listaProdutos = useRef([]);
   const maxQtdPagina = Math.ceil(listaProdutos.current.length / 10);
@@ -28,15 +30,16 @@ const ProdutosLista = (props) => {
 
   useEffect(()=>{(
     async ()=>{
-      const list = await getAllProdutos();      
+      const list = await getAllProducts(token);      
       listaProdutos.current = list;
-      setProdutosFiltrado(filtrarListaPorPagina(listaProdutos.current, pagina));               
+      setProdutosFiltrado(filtrarListaPorPagina(listaProdutos.current, pagina));      
+      console.log(listaProdutos.current);
     })();
   },[]);
   
   const filtrarListaPorTermoBusca = (lista, termo) => {
     return lista.filter((listaProdutos) => {
-      return new RegExp(termo, "ig").test(listaProdutos.Nome);
+      return new RegExp(termo, "ig").test(listaProdutos.nome);
     });
   };
   
@@ -78,7 +81,7 @@ const ProdutosLista = (props) => {
         <Pesquisa 
           placeholder={"Nome do produto..."}
           onChange={(event)=>{
-            setTermoBusca(event.target.value);
+            setTermoBusca(event);
           }}
         />
       </header>
@@ -104,14 +107,14 @@ const ProdutosLista = (props) => {
           </TableHead>
           <TableBody>
             {produtosFiltrado.map((item) => (
-              <TableRow key={item.Id}>
+              <TableRow key={item.id}>
                 <TableCell component="th" scope="row">
                   {(item.Ativo)? "Ativo" : "Descontinuado"}
                 </TableCell>
-                <TableCell align="center">{item.Nome}</TableCell>
-                <TableCell align="center">{formatarMoeda(item.Valor)}</TableCell>
+                <TableCell align="center">{item.nome}</TableCell>
+                <TableCell align="center">{formatarMoeda(item.valor)}</TableCell>
                 <TableCell align="right">
-                  <Link to={`EditarProduto/${item.Id}`}>
+                  <Link to={`EditarProduto/${item.id}`}>
                     <RiPencilFill size={30}/>
                   </Link>
                 </TableCell>                
