@@ -37,9 +37,9 @@ const VendaProduto = () => {
 
   const pesquisarProdutos = (event) => {
     event.preventDefault();
-
+    
     const produtosFiltrados = listaProdutos.filter((produtos) =>
-      produtos.nome.includes(pesquisaProduto),
+      produtos.nome.toUpperCase().includes(pesquisaProduto.toUpperCase()),
     );
 
     setProdutosPesquisados(produtosFiltrados);
