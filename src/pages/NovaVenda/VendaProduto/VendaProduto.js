@@ -18,7 +18,7 @@ const VendaProduto = () => {
   const navigate = useNavigate();
   const { token } = useAuth();
 
-  const { adicionarProdutos } = useContext(VendaContext);
+  const { adicionarProdutos, calcularValorProdutos, calcularQuantidadeItens } = useContext(VendaContext);
 
   const [pesquisaProduto, setPesquisaProduto] = useState('');
   const [listaProdutos, setListaProdutos] = useState([]);
@@ -29,6 +29,11 @@ const VendaProduto = () => {
   const [quantidadeItens, setQuantidadeItens] = useState(0);
 
   const notificar = (nome) => toast(`${nome} adicionado ao carrinho`);
+
+  const atualizarListaProdutos = (novoValor) => {
+    setCarrinho(novoValor);
+    adicionarProdutos(novoValor);
+}
 
   const pesquisarProdutos = (event) => {
     event.preventDefault();
@@ -50,12 +55,12 @@ const VendaProduto = () => {
 
   const adicionarProduto = (produto) => {
     if (carrinho.length === 0 || !carrinho.some(some => some.id === produto.id)) {
-      setCarrinho([...carrinho, { ...produto, quantidade: 1 }]);
+      atualizarListaProdutos([...carrinho, { ...produto, quantidade: 1 }]);
     } else {
       const handlerCarrinho = carrinho;
       const itemIndex = handlerCarrinho.findIndex(find => find.id === produto.id);
       handlerCarrinho[itemIndex].quantidade++;
-      setCarrinho([...handlerCarrinho]);
+      atualizarListaProdutos([...handlerCarrinho]);
     }
     notificar(produto.nome);
   };
@@ -65,30 +70,15 @@ const VendaProduto = () => {
     navigate('/VendaResumo');
   };
 
-  const calcularValorTotal = () => {
-    let total = 0;
-    carrinho.forEach((produto) => {
-      total += produto.valor * produto.quantidade;
-    });
-
-    return total;
-  };
-
   useEffect(() => {
-    if (carrinho.length > 0) {
-      setDesabilitarBotao(false);
-      let totalItens = 0
-      carrinho.forEach(each => totalItens += each.quantidade)
-      setQuantidadeItens(totalItens);
-    } else {
-      setDesabilitarBotao(true);
-    }
-    
-    setValorTotal(calcularValorTotal());
+    setQuantidadeItens(calcularQuantidadeItens());
+    setDesabilitarBotao(!carrinho || carrinho.length === 0);
+    setValorTotal(calcularValorProdutos());
   }, [carrinho]);
 
   useEffect(() => {
     (async () => {
+      atualizarListaProdutos([])
       const listaProdutosAPI = await getAllProducts(token);
       setListaProdutos(listaProdutosAPI);
     })();

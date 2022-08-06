@@ -1,0 +1,52 @@
+.containerProdutos {
+    margin: 10px 0;
+}
+
+.tabelaProdutos {
+    width: 100%;
+}
+
+.tabelaHeader {
+    margin: 20px auto;
+    padding: 10px;
+    width: 100%;
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.4rem;
+    background: var(--white);
+}
+
+.tabelaItem {
+    margin: 20px auto;
+    padding: 10px;
+    width: 100%;
+    height: 120px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.4rem;
+    background: var(--white);
+}
+
+.celulaProduto {
+    text-align: center;
+}
+
+.botaoQuantidade {
+    color: var(--blue);
+    font-size: 1.7rem;
+    margin: 0 10px;
+    vertical-align: middle;
+    cursor: pointer;
+    transition: 0.5s;
+}
+.botaoQuantidade:hover {
+    color: var(--blue-dark);
+    transition: 0.5s;
+}
+
+.botaoLixeira {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--red);
+}
