@@ -1,5 +1,9 @@
 export const itemsMenus = [
 	{
+		Descricao: 'Home',
+		Rota: '/',
+	},
+	{
 		Descricao: 'Nova Venda',
 		Rota: '/VendaProduto',
 	},

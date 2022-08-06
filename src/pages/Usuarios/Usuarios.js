@@ -5,13 +5,13 @@ import UsuarioLista from "./UsuarioLista/UsuarioLista";
 
 const Usuarios = () => {
 
-  const handerProductPage = () => {
+  const handleUserPage = () => {
     return <UsuarioLista />;
   };
   return (
     <main className={style.main}>
       <Menus />
-      {handerProductPage()}
+      {handleUserPage()}
     </main>
   );
 };

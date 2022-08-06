@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -18,6 +18,8 @@ import { useAuth } from "../../../contexts/Auth/useAuth";
 import { getAllProducts } from './../../../services/ProdutosService';
 import { formatarMoeda } from './../../../utils/FormatarMoeda';
 
+import { ProdutosContext } from '../../../contexts/ProdutosContext';
+
 const ProdutosLista = (props) => {
   const { token } = useAuth();
 
@@ -28,12 +30,11 @@ const ProdutosLista = (props) => {
   const [termoBusca, setTermoBusca] = useState("");
   const [pagina, setPagina] = useState(1);
 
-  useEffect(()=>{(
-    async ()=>{
+  useEffect(() =>{(
+    async () =>{
       const list = await getAllProducts(token);      
       listaProdutos.current = list;
       setProdutosFiltrado(filtrarListaPorPagina(listaProdutos.current, pagina));      
-      console.log(listaProdutos.current);
     })();
   },[]);
   
@@ -69,6 +70,7 @@ const ProdutosLista = (props) => {
     totalPages: maxQtdPagina
   };
 
+
   return(    
     <section className={styles.section}>  
       <header className={styles.header}>
@@ -99,7 +101,7 @@ const ProdutosLista = (props) => {
           </caption>
           <TableHead>
             <TableRow>
-              <TableCell>#</TableCell>
+              <TableCell align="center">Status</TableCell>
               <TableCell align="center">Nome</TableCell>
               <TableCell align="center">Valor p/ caixa(g)</TableCell>
               <TableCell align="center">Ações</TableCell>
@@ -107,14 +109,14 @@ const ProdutosLista = (props) => {
           </TableHead>
           <TableBody>
             {produtosFiltrado.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell component="th" scope="row">
-                  {(item.Ativo)? "Ativo" : "Descontinuado"}
+              <TableRow  key={item.id}>
+                <TableCell align="center" component="th" scope="row">
+                  {(item.ativo)? "Ativo" : "Descontinuado"}
                 </TableCell>
                 <TableCell align="center">{item.nome}</TableCell>
                 <TableCell align="center">{formatarMoeda(item.valor)}</TableCell>
-                <TableCell align="right">
-                  <Link to={`EditarProduto/${item.id}`}>
+                <TableCell align="center">
+                  <Link to={`EditarProduto/idProduto=${item.id}`}>
                     <RiPencilFill size={30}/>
                   </Link>
                 </TableCell>                

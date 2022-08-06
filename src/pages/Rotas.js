@@ -9,7 +9,7 @@ import Vendas from "./Vendas/Vendas";
 import Usuarios from "./Usuarios";
 import UsuariosForm from "./Usuarios/UsuarioForm/UsuariosForm";
 import Comprador from "./Compradores/Comprador";
-import CompradorForm from "./Compradores/Comprador";
+import CompradorForm from "./Compradores/CompradorForm";
 import FreteForm from "./Frete/FreteForm/FreteForm";
 import Frete from "./Frete/FreteLista/Frete";
 import EditaFreteForm from "./Frete/EditaFreteForm/EditaFreteForm";
@@ -22,7 +22,7 @@ const Rotas = () => {
 				<Route path="/Login" exact element={<Login />} />
 				<Route path="/Produtos" exact element={<Produtos />} />
 				<Route
-					path="Produtos/EditarProduto/:idProduto"
+					path="Produtos/EditarProduto/idProduto=:idProduto"
 					exact
 					element={<ProdutosForm />}
 				/>
@@ -42,7 +42,8 @@ const Rotas = () => {
 				/>
 				<Route path="/MinhasEntregas" exact element={<Vendas />} />
 				<Route path="/Compradores" exact element={<Comprador />} />
-				<Route path="/NovoComprador" exact element={<CompradorForm />} />
+				<Route path="/NovoComprador/:title/:labelButton" exact element={<CompradorForm />} />
+				<Route path="/NovoComprador/:title/:labelButton/:id" exact element={<CompradorForm />} />
 			</Routes>
 		</BrowserRouter>
 	);
