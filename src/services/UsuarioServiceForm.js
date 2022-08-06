@@ -14,9 +14,13 @@ export const setNovoUsuario = async (usuario) => {
       data: usuario,
     });
 
+    if(response.status === 201){ 
+      toast("Usuário cadastrado com sucesso!")
+    }
     return response;
+    //return response.status;
   } catch (err) {
-    console.log("O erro esta aqui: ",err.response.data);
+    //console.log("O erro esta aqui: ",err.response.data);
     toast(err.response.data)
   }
 };
