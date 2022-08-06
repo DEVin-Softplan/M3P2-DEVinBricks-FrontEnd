@@ -11,3 +11,9 @@
     align-items: flex-end;
     padding: 15px 0;
   }
+
+  .botaoConfirmarPlace {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
