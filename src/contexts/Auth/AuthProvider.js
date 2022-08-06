@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 		if (tokenStorage) {
 			setToken(tokenStorage);
 			const parser = JSON.parse(atob(tokenStorage.split('.')[1]));
-			setUser(parser);
+			setUser(parser.name);
 			setAuth(true);
 		}
 	}, []);

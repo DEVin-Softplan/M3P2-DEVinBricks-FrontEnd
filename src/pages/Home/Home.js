@@ -4,13 +4,13 @@ import style from './Home.module.css';
 import Login from '../Login';
 import { useAuth } from '../../contexts/Auth/useAuth';
 
-const renderFirstPage = (auth) => {
+const renderFirstPage = (auth, user) => {
 	if (auth) {
 		return (
 			<>
 				<Menus />
 				<section className={style.section}>
-					<h1>Bem vindo ao DevInBricks!</h1>
+					{user ? <h1>Bem vindo, {user}!</h1> : <h1>Bem vindo!</h1>} 
 				</section>
 			</>
 		);
@@ -21,7 +21,8 @@ const renderFirstPage = (auth) => {
 
 const Home = () => {
 	const { auth } = useAuth();
-	return renderFirstPage(auth);
+	const { user } = useAuth();
+	return renderFirstPage(auth, user);
 };
 
 export default Home;
