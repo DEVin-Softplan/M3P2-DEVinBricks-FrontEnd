@@ -15,13 +15,13 @@ export const setNovoUsuario = async (usuario) => {
     });
 
     if(response.status === 201){ 
-      toast("Usuário cadastrado com sucesso!")
+      toast.success("Usuário cadastrado com sucesso!")
     }
     return response;
     //return response.status;
   } catch (err) {
     //console.log("O erro esta aqui: ",err.response.data);
-    toast(err.response.data)
+    toast.error(err.response.data)
   }
 };
 
@@ -37,14 +37,14 @@ export const setAlteraUsuario = async (userObj) => {
     });
 
     if(response.status === 200 || response.status === 204){ 
-      toast("Usuário Alterado com sucesso!")
+      toast.success("Usuário Alterado com sucesso!")
     }
     if(response.status === 400){ 
-      toast(response.data)
+      toast.warn("Ops... O e-mail ou o Login já está(ão) em uso.")
     }
     return response;
   } catch (err) {
-    toast(err)
+    toast.error(err)
     console.log("Erro: ", err);
   }
 };

@@ -2,7 +2,6 @@ import { FormControlLabel, FormGroup, Switch, TextField } from "@mui/material";
 import { FormikProvider, useFormik } from "formik";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import * as yup from "yup";
 import Button from "../../../components/Button";
 import Header from "../../../components/Header";
 import Menus from "../../../components/Menus";
