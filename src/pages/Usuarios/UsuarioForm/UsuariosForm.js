@@ -1,15 +1,11 @@
-import CloseIcon from '@mui/icons-material/Close';
 import { FormControlLabel, FormGroup, Switch, TextField } from "@mui/material";
-import IconButton from '@mui/material/IconButton';
-import Snackbar from '@mui/material/Snackbar';
 import { FormikProvider, useFormik } from "formik";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
 import Button from "../../../components/Button";
 import Header from "../../../components/Header";
 import Menus from "../../../components/Menus";
-import { setNovoUsuario } from "../../../services/UsuarioService";
+import { setNovoUsuario } from "../../../services/UsuarioServiceForm";
 import style from "./UsuariosForm.module.css";
 
 const UsuariosForm = () => {
@@ -18,7 +14,7 @@ const UsuariosForm = () => {
       nome: "",
       email: "",
       login: "",
-      admin:"",
+      admin: "",
     },
     validationSchema: yup.object({
       nome: yup.string().required("O campo é obrigatório."),
@@ -30,38 +26,11 @@ const UsuariosForm = () => {
       admin: yup.bool().required("O campo é obrigatório."),
     }),
     onSubmit: (values) => {
-      alert(JSON.stringify(values));
       setNovoUsuario(values);
     },
   });
 
   const { handleSubmit } = formik;
-
-  const [open, setOpen] = useState(false);
-
-  const handleClick = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  const action = (
-    <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-  );
-
 
   return (
     <>
@@ -111,7 +80,7 @@ const UsuariosForm = () => {
               onChange={formik.handleChange}
               error={formik.touched.admin && Boolean(formik.errors.admin)}
               helperText={formik.touched.admin && formik.errors.admin}
-              control={<Switch defaultChecked />}
+              control={<Switch defaultValue={false}/>}
               label="É usuário admin?"
             />
           </FormGroup>
@@ -119,19 +88,12 @@ const UsuariosForm = () => {
             <Link to="/Usuarios">
               <Button variant="contained">Voltar</Button>
             </Link>
-            <Button variant="contained" type="submit" onClick={handleClick}>
+            <Button variant="contained" type="submit">
               Cadastrar
             </Button>
           </div>
         </form>
       </FormikProvider>
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        message="ALERT"
-        action={action}
-      />
     </>
   );
 };
