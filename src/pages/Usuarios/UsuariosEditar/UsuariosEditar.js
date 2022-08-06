@@ -1,32 +1,41 @@
 import { FormControlLabel, FormGroup, Switch, TextField } from "@mui/material";
 import { FormikProvider, useFormik } from "formik";
-import { Link } from "react-router-dom";
-import * as yup from "yup";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../../components/Button";
 import Header from "../../../components/Header";
 import Menus from "../../../components/Menus";
-import { setNovoUsuario } from "../../../services/UsuarioServiceForm";
-import style from "./UsuariosForm.module.css";
+import { setAlteraUsuario } from "../../../services/UsuarioServiceForm";
+import style from "./UsuariosEditar.module.css";
 
-const UsuariosForm = () => {
+export const UsuariosEditar = () => {
+
+  const navigate = useNavigate();
+  const { id, nome, email, login, admin, ativo } = useParams();
+
+  const [btnAdmin, setBtnAdmin] = useState(admin === "true" ? true : false);
+  const [btnAtivo, setBtnAtivo] = useState(ativo === "true" ? true : false);
+
+  const handleBtnAdminChange = () => {
+    setBtnAdmin(!btnAdmin);
+  }
+  const handleBtnAtivoChange = () => {
+    setBtnAtivo(!btnAtivo);
+  }
+
   const formik = useFormik({
     initialValues: {
-      nome: "",
-      email: "",
-      login: "",
-      admin: "",
+      id: id,
+      nome: nome,
+      email: email,
+      login: login,
+      admin: null,
+      ativo: null
     },
-    validationSchema: yup.object({
-      nome: yup.string().required("O campo é obrigatório."),
-      email: yup
-        .string()
-        .email("E-mail inválido.")
-        .required("O campo é obrigatório."),
-      login: yup.string().required("O campo é obrigatório."),
-      admin: yup.bool().required("O campo é obrigatório."),
-    }),
     onSubmit: (values) => {
-      setNovoUsuario(values);
+      values.admin = btnAdmin;
+      values.ativo = btnAtivo;
+      setAlteraUsuario(values);
     },
   });
 
@@ -37,7 +46,7 @@ const UsuariosForm = () => {
       <Menus />
       <FormikProvider value={formik}>
         <form className={style.container} noValidate onSubmit={handleSubmit}>
-          <Header title="Novo usuário" />
+          <Header title="Editar usuário" />
           <TextField
             fullWidth
             id="nome"
@@ -46,19 +55,15 @@ const UsuariosForm = () => {
             variant="outlined"
             value={formik.values.nome}
             onChange={formik.handleChange}
-            error={formik.touched.nome && Boolean(formik.errors.nome)}
-            helperText={formik.touched.nome && formik.errors.nome}
           />
           <TextField
             fullWidth
             id="email"
             name="email"
-            label="email"
+            label="Email"
             variant="outlined"
             value={formik.values.email}
             onChange={formik.handleChange}
-            error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
           />
           <TextField
             fullWidth
@@ -68,28 +73,35 @@ const UsuariosForm = () => {
             variant="outlined"
             value={formik.values.login}
             onChange={formik.handleChange}
-            error={formik.touched.login && Boolean(formik.errors.login)}
-            helperText={formik.touched.login && formik.errors.login}
           />
           <FormGroup>
             <FormControlLabel
               id="admin"
               name="admin"
+              label="É usuário admin?"
               variant="outlined"
               value={formik.values.admin}
               onChange={formik.handleChange}
-              error={formik.touched.admin && Boolean(formik.errors.admin)}
-              helperText={formik.touched.admin && formik.errors.admin}
-              control={<Switch defaultValue={false}/>}
-              label="É usuário admin?"
+              control={<Switch checked={btnAdmin} onChange={handleBtnAdminChange}/>}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormControlLabel
+              id="ativo"
+              name="ativo"
+              label="É usuário ativo?"
+              variant="outlined"
+              value={formik.values.ativo}
+              onChange={formik.handleChange}
+              control={<Switch checked={btnAtivo} onChange={handleBtnAtivoChange}/>}
             />
           </FormGroup>
           <div>
-            <Link to="/Usuarios">
-              <Button variant="contained">Voltar</Button>
-            </Link>
+            <Button vairant="contained" onClick={() => {navigate(`/Usuarios`)}}>
+              Voltar
+            </Button>
             <Button variant="contained" type="submit">
-              Cadastrar
+              Editar
             </Button>
           </div>
         </form>
@@ -97,5 +109,3 @@ const UsuariosForm = () => {
     </>
   );
 };
-
-export default UsuariosForm;
