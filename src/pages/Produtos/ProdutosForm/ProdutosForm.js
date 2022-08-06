@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {forwardRef, useState, useEffect, useRef } from 'react';
 import style from './ProdutosForm.module.css'
 import Header from '../../../components/Header/Header';
 import Button from '../../../components/Button';
@@ -7,6 +7,7 @@ import { useAuth } from "../../../contexts/Auth/useAuth";
 import { getProductById, createNewProduct } from '../../../services/ProdutosService';
 
 import { formatarMoeda } from '../../../utils/FormatarMoeda';
+import NumberFormat from "react-number-format";
 
 import { 
   TextField, 
@@ -31,53 +32,72 @@ const ProdutosForm = () => {
     })();
   },[]);
 
-  const [ValuesProduct, setValuesProduct] = useState({
+  const [valuesProduct, setValuesProduct] = useState({
 		produto:{
       nome: "",
       descricao: "",
       urlDaImagem: "",
       ativo: false,
       valor:  ""
-    }
+    },
 	});
  
   const handleChangeFields = (event) => {
 		setValuesProduct({
-			...ValuesProduct,
+			...valuesProduct,
 			[event.target.name]: {
-        nome: event.target.value,
-        descricao: event.target.value,
-        urlDaImagem: event.target.value,
-        ativo: event.target.value,
-        valor:  event.target.value,
+        value: event.target.value,        
 			},
 		});
 	};
 
-  const handleSubmitNewProduct = async () =>
-  {
-    const novoProduto = {
-      nome: ValuesProduct.nome,
-      descricao: ValuesProduct.descricao,
-      urlDaImagem: ValuesProduct.urlDaImagem,
-      ativo: true,
-      valor: formatarMoeda(ValuesProduct.valor || 0) 
-    };
+  const validaDatos = () => {
+    if(valuesProduct.descricao === ""){
+      return false;
+    }else{
+      setValuesProduct({
+        produto:{
+          nome: valuesProduct.nome,
+          descricao: valuesProduct.descricao,
+          urlDaImagem: valuesProduct.urlDaImagem,
+          ativo: valuesProduct.ativo,
+          valor: valuesProduct.valor
+        }
+      });
 
-    console.log(JSON.stringify(novoProduto));
+      console.log(`ON VALIDA DADOS: ${valuesProduct.produto}`);
 
-    try{
-      const response = await createNewProduct(token, novoProduto);      
-      if(response.ok){ 
-        alert("Produto criado com sucesso!");
-      }else
-      {
-        alert("Erro na criaçãodo produto");
-      }
-    }catch{
-      
+      return true;
     }
   }
+
+  const handleSubmitNewProduct = async () =>
+  {
+    if(validaDatos()){
+    console.log(`ON SUBMIT: ${JSON.stringify(valuesProduct)}`);
+      try{
+        const response = await createNewProduct(
+          token, 
+          {
+            nome: valuesProduct.nome.value,
+            descricao: valuesProduct.descricao.value,
+            urlDaImagem: valuesProduct.urlDaImagem.value,
+            ativo: 1,
+            valor: valuesProduct.valor.value 
+          }
+        );      
+
+        if(response.ok){ 
+          alert("Produto criado com sucesso!");
+        }else
+        {
+          alert("Erro na criação do produto");
+        }
+      }catch(error){
+
+      }
+    };
+  };
 
   const produto = {
     id: produtoEditavel.id,
@@ -85,8 +105,33 @@ const ProdutosForm = () => {
     descricao: produtoEditavel.descricao,
     urlDaImagem: produtoEditavel.urlDaImagem,
     ativo: produtoEditavel.ativo,
-    valor: formatarMoeda(produtoEditavel.valor || 0) 
+    valor: 0
   };
+
+  const NumberFormatCustom = forwardRef(function NumberFormatCustom(props, ref) {
+    const { onChange, ...other } = props;
+  
+    return (
+      <NumberFormat
+        {...other}
+        getInputRef={ref}
+        onValueChange={(values) => {
+          onChange({
+            target: {
+              name: props.name,
+              value: values.value,
+            },
+          });
+        }}
+        thousandSeparator="."
+        decimalSeparator=","
+        isNumericString
+        allowNegative={false}
+        decimalScale="2"
+        prefix="R$ "
+      />
+    );
+  });
 
   return (
     <>
@@ -127,7 +172,10 @@ const ProdutosForm = () => {
           sx={{height:"70px", width: "400px"}}
           value={produto.valor}
           name="valor"
-          onChange={handleChangeFields}       
+          onChange={handleChangeFields}
+          InputProps={{
+						inputComponent: NumberFormatCustom,
+					}}      
         />
         
         <TextareaAutosize        

@@ -65,6 +65,8 @@ export const createNewProduct = async (token, product) => {
       },
     });
 
+    console.log(`PARAM: ${product}`)
+
     if (data) {
       const produto = await data.json();
       return produto;
