@@ -9,21 +9,12 @@ import Button from '../../../components/Button';
 import Swal from 'sweetalert2';
 
 const VendaResumo = () => {
-    const { dadosVenda, adicionarProdutos } = useContext(VendaContext);
+    const { dadosVenda, adicionarProdutos, calcularValorProdutos, calcularQuantidadeItens } = useContext(VendaContext);
     const [quantidadeItens, setQuantidadeItens] = useState(0);
 
     const { user } = useAuth();
 
     const [valorTotal, setValorTotal] = useState(0);
-
-
-    const calcularValorProdutos = () => {
-        let total = 0;
-        dadosVenda.produtos?.forEach((produto) => {
-            total += produto.valor * produto.quantidade;
-        });
-        return total;
-    }
 
     const confirmarCarrinho = () => {
         Swal.fire({
@@ -49,11 +40,7 @@ const VendaResumo = () => {
 
     useEffect(() => {
         setValorTotal(calcularValorProdutos())
-        if (dadosVenda.produtos?.length > 0) {
-            let totalItens = 0
-            dadosVenda.produtos?.forEach(each => totalItens += each.quantidade)
-            setQuantidadeItens(totalItens);
-        }
+        setQuantidadeItens(calcularQuantidadeItens());
     }, [dadosVenda])
 
     return (
