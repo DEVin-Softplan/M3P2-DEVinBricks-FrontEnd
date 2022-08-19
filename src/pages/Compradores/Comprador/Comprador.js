@@ -11,17 +11,28 @@ import { cliente } from '../../../services/BaseService';
 import Menus from '../../../components/Menus';
 
 const Comprador = () => {
-  const [comprador, setComprador] = useState([])
+  const [comprador, setComprador] = useState([]);
+  const [termoBusca, setTermoBusca] = useState('');
 
   useEffect(() => {
-    cliente.get('/api/Comprador?nome=&cpf=')
-      .then(res => {
-        setComprador(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-        setComprador([])
-      })
+    console.log(1)
+    fetch(`https://localhost:7171/api/Comprador?pagina=0&tamanhopagina=10`, {
+      method: 'GET',
+      headers: new Headers({
+        'Authorization': `bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+        
+      }),      
+    }).then(response => {
+      console.log(2)
+      response.json()
+        .then(comprador => { 
+          console.log(3)
+          setComprador(comprador);
+          console.log(4)
+          console.log(setComprador);
+        })
+    })
   }, [])
 
   return (
@@ -59,8 +70,7 @@ const Comprador = () => {
                   <TableCell align="right">
                     <Link to={`/NovoComprador/Editar Comprador/Salvar/${row.id}`}>
                       <RiPencilFill size={30} />
-                    </Link>
-                    <FaCartArrowDown size={30} />
+                    </Link>                    
                   </TableCell>
                 </TableRow>
               ))}
