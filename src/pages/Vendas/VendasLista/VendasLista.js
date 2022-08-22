@@ -14,7 +14,7 @@ import VendaModal from '../VendaModal/VendaModal';
 import { AiFillDelete } from "react-icons/ai"
 import PageInfo from '../../../components/PageInfo';
 import { formatarMoeda } from '../../../utils/FormatarMoeda';
-
+  
 const venda = [{comprador: {
     nome: "Jose Oliveira",
     cpf: "221.534.787-02",

@@ -9,14 +9,14 @@
     display: flex;
     flex-direction: column;  
     width: 100%;
-    max-width: 700px;
+    max-width: 59vw;
     
   }
   
   .firstDivHeader{
     display: flex;  
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     /* background-color: aquamarine; */
   }
   
@@ -34,5 +34,15 @@
   
   .table{
     margin: 1rem;
+  }
+
+  .busca{
+    width: 58vw;
+    height: 4vw;
+    border-radius: 0.5vw;
+    border: 1px solid;
+    margin: auto;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
   }
   
