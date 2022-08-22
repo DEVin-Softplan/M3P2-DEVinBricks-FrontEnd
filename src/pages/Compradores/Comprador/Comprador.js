@@ -6,23 +6,39 @@ import Button from '../../../components/Button';
 import Header from '../../../components/Header/Header';
 import Pesquisa from '../../../components/Pesquisa';
 import styles from './Comprador.module.css';
-import { FaCartArrowDown } from 'react-icons/fa'
-import { cliente } from '../../../services/BaseService';
 import Menus from '../../../components/Menus';
 
 const Comprador = () => {
-  const [comprador, setComprador] = useState([])
+  const [comprador, setComprador] = useState([]);
+  const [termoBusca, setTermoBusca] = useState("");
+  const [listaFiltradaCompradores, setListafiltrada] = useState([])
 
   useEffect(() => {
-    cliente.get('/api/Comprador?nome=&cpf=')
-      .then(res => {
-        setComprador(res.data)
-      })
-      .catch(err => {
-        console.log(err)
-        setComprador([])
-      })
+    fetch(`https://localhost:7171/api/Comprador?pagina=0&tamanhopagina=10`, {
+      method: 'GET',
+      headers: new Headers({
+        'Authorization': `bearer ${localStorage.getItem('token')}`,
+        'Content-Type': 'application/json',
+        
+      }),      
+    }).then(response => {
+      response.json()
+        .then(comprador => { 
+          setComprador(comprador);
+          setListafiltrada(comprador);
+        })
+    })
   }, [])
+
+  useEffect(() => {
+    if (termoBusca) {
+      const listaFiltrada = comprador.resultados?.filter((comprador) =>
+        comprador.nome.toUpperCase().toUpperCase().includes(termoBusca.toUpperCase()))
+        setListafiltrada(listaFiltrada)
+    } else {
+      setListafiltrada(comprador)
+    }
+  }, [termoBusca, comprador]);
 
   return (
     <main className={styles.main}>
@@ -35,7 +51,12 @@ const Comprador = () => {
               <Button>Novo Comprador</Button>
             </Link>
           </div>
-          <Pesquisa placeholder={"Nome do comprador..."} />
+          <input 
+            className={styles.busca} 
+            placeholder={"  Nome do comprador..."} 
+            onChange={(event) => {
+              setTermoBusca(event.target.value)
+          }}/>
         </header>
 
         <TableContainer
@@ -44,23 +65,22 @@ const Comprador = () => {
           <Table sx={{ minWidth: 240 }} aria-label="caption table">
             <TableHead>
               <TableRow>
-                <TableCell align="right">Nome</TableCell>
-                <TableCell align="right">Telefone</TableCell>
-                <TableCell align="right">CPF </TableCell>
-                <TableCell align="right">Ações</TableCell>
+                <TableCell align="left">Nome</TableCell>
+                <TableCell align="left">Telefone</TableCell>
+                <TableCell align="left">CPF </TableCell>
+                <TableCell align="left">Ações</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {comprador.resultados?.map((row) => (
+              {listaFiltradaCompradores.resultados?.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell component="th" scope="row">{row.nome}</TableCell>
-                  <TableCell align="right">{row.telefone}</TableCell>
-                  <TableCell align="right">{row.cpf}</TableCell>
-                  <TableCell align="right">
+                  <TableCell align="left">{row.telefone}</TableCell>
+                  <TableCell align="left">{row.cpf}</TableCell>
+                  <TableCell align="left">
                     <Link to={`/NovoComprador/Editar Comprador/Salvar/${row.id}`}>
                       <RiPencilFill size={30} />
-                    </Link>
-                    <FaCartArrowDown size={30} />
+                    </Link>                    
                   </TableCell>
                 </TableRow>
               ))}
