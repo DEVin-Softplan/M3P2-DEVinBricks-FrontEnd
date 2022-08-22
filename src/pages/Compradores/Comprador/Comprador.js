@@ -72,7 +72,7 @@ const Comprador = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {listaFiltradaCompradores.resultados.map((row) => (
+              {listaFiltradaCompradores.resultados?.map((row) => (
                 <TableRow key={row.id}>
                   <TableCell component="th" scope="row">{row.nome}</TableCell>
                   <TableCell align="left">{row.telefone}</TableCell>
