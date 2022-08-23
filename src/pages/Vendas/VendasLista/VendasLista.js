@@ -100,7 +100,6 @@ export default function VendasLista() {
                 <TableCell align="left">{row.comprador.nome}</TableCell>
                 <TableCell align="left">{formatarMoeda(row.dadosEntrega.total)}</TableCell>
                 <TableCell align="center">
-                    <a className={styles.actionIcon}><AiFillDelete size={25} /></a>
                     <a className={styles.actionIcon}><BsFillEyeFill size={25} onClick={openModal}></BsFillEyeFill></a>
                         <Modal
                         isOpen={modalisopen}
