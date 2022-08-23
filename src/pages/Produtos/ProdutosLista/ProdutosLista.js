@@ -18,9 +18,7 @@ import { useAuth } from "../../../contexts/Auth/useAuth";
 import { getAllProducts } from './../../../services/ProdutosService';
 import { formatarMoeda } from './../../../utils/FormatarMoeda';
 
-import { ProdutosContext } from '../../../contexts/ProdutosContext';
-
-const ProdutosLista = (props) => {
+const ProdutosLista = () => {
   const { token } = useAuth();
 
   const listaProdutos = useRef([]);
